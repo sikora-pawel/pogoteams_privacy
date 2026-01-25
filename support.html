@@ -2,13 +2,216 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Support</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support – PogoTeams</title>
+  <meta name="theme-color" content="#120818">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/app-icon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #120818;
+      --bg-card: #1a0f1f;
+      --accent: #A631D8;
+      --accent-light: #c45ef0;
+      --text-primary: #ffffff;
+      --text-secondary: #b8a8c0;
+      --text-muted: #6b5a73;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      padding: 1rem 2rem;
+      background: rgba(18, 8, 24, 0.9);
+      border-bottom: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .nav-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 28px;
+    }
+
+    .nav-back {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover {
+      color: var(--accent-light);
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .intro {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .support-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .support-card:hover {
+      border-color: rgba(166, 49, 216, 0.4);
+    }
+
+    .support-card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .support-card p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .support-card a.btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .support-card a.btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(166, 49, 216, 0.4);
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    footer {
+      padding: 2rem;
+      border-top: 1px solid rgba(166, 49, 216, 0.1);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Support</h1>
 
-  <p>If you need help or want to report an issue, contact:</p>
+  <nav>
+    <div class="nav-content">
+      <a href="index.html">
+        <img src="assets/logo_horizontal.png" alt="PogoTeams" class="nav-logo">
+      </a>
+      <a href="index.html" class="nav-back">Back to Home</a>
+    </div>
+  </nav>
 
-  <p><strong>Email:</strong> pogoteambuilder@gmail.com</p>
+  <main>
+    <h1>Support</h1>
+    <p class="intro">Need help or want to report an issue? We're here to help.</p>
+
+    <div class="support-card">
+      <h2>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        Email Support
+      </h2>
+      <p>For bug reports, feature requests, or general questions, reach out via email. We typically respond within 24-48 hours.</p>
+      <a href="mailto:pogoteambuilder@gmail.com" class="btn">Contact Us</a>
+    </div>
+
+    <div class="support-card">
+      <h2>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Before You Contact Us
+      </h2>
+      <p>Make sure you're running the latest version of PogoTeams from the App Store. Many issues are resolved in updates.</p>
+    </div>
+  </main>
+
+  <footer>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+    </ul>
+    <p class="footer-copyright">&copy; 2025 PogoTeams. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>

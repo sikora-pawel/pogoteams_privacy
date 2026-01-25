@@ -2,18 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Privacy Policy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy – PogoTeams</title>
+  <meta name="theme-color" content="#120818">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/app-icon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #120818;
+      --bg-card: #1a0f1f;
+      --accent: #A631D8;
+      --accent-light: #c45ef0;
+      --text-primary: #ffffff;
+      --text-secondary: #b8a8c0;
+      --text-muted: #6b5a73;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      padding: 1rem 2rem;
+      background: rgba(18, 8, 24, 0.9);
+      border-bottom: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .nav-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 28px;
+    }
+
+    .nav-back {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover {
+      color: var(--accent-light);
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-light);
+    }
+
+    .last-updated {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .content-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    footer {
+      padding: 2rem;
+      border-top: 1px solid rgba(166, 49, 216, 0.1);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Privacy Policy</h1>
 
-  <p>This app does not collect, store, or share any personal data.</p>
+  <nav>
+    <div class="nav-content">
+      <a href="index.html">
+        <img src="assets/logo_horizontal.png" alt="PogoTeams" class="nav-logo">
+      </a>
+      <a href="index.html" class="nav-back">Back to Home</a>
+    </div>
+  </nav>
 
-  <p>Analytics data (if used) is collected in an anonymous and aggregated form
-  to improve app performance and user experience.</p>
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: January 2025</p>
 
-  <p>No personal information is sold or shared with third parties.</p>
+    <div class="content-card">
+      <h2>Data Collection</h2>
+      <p>PogoTeams does not collect, store, or share any personal data. Your team configurations and Pokémon data are stored locally on your device only.</p>
 
-  <p>If you have any questions, contact: pogoteambuilder@gmail.com</p>
+      <h2>Analytics</h2>
+      <p>Anonymous, aggregated analytics data may be collected to improve app performance and user experience. This data cannot be used to identify individual users.</p>
+
+      <h2>Third Parties</h2>
+      <p>No personal information is sold or shared with third parties.</p>
+
+      <h2>Contact</h2>
+      <p>If you have any questions about this privacy policy, please contact us at: <a href="mailto:pogoteambuilder@gmail.com">pogoteambuilder@gmail.com</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+    <p class="footer-copyright">&copy; 2025 PogoTeams. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
