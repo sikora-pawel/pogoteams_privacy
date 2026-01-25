@@ -130,19 +130,21 @@
     }
 
     .hero-text {
-      max-width: 540px;
+      max-width: 600px;
+      text-align: center;
     }
 
-    .hero-logo {
-      height: 56px;
-      margin-bottom: 1.5rem;
+    .hero-graphic {
+      width: 480px;
+      height: auto;
+      margin-bottom: 0.5rem;
     }
 
     .hero-title {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
     }
 
     .hero-title .highlight {
@@ -153,10 +155,10 @@
     }
 
     .hero-subtitle {
-      font-size: 1.15rem;
+      font-size: 1rem;
       color: var(--text-secondary);
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
+      margin-bottom: 2rem;
+      line-height: 1.6;
     }
 
     .store-buttons {
@@ -164,6 +166,7 @@
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
+      justify-content: center;
     }
 
     .store-btn {
@@ -529,6 +532,10 @@
         justify-content: center;
       }
 
+      .hero-graphic {
+        width: 300px;
+      }
+
       .hero-phones {
         order: -1;
       }
@@ -571,6 +578,10 @@
     @media (max-width: 600px) {
       .hero {
         padding: 6rem 1.5rem 3rem;
+      }
+
+      .hero-graphic {
+        width: 240px;
       }
 
       .hero-phones::before {
@@ -636,7 +647,7 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <img src="assets/logo_horizontal.png" alt="PogoTeams" class="hero-logo">
+        <img src="assets/logo_graphic_glow.png" alt="PogoTeams" class="hero-graphic">
         <h1 class="hero-title">
           Build <span class="highlight">winning</span> teams for Pokémon GO PvP
         </h1>
