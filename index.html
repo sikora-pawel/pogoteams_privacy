@@ -241,8 +241,8 @@
     }
 
     .hero-phone:nth-child(2) {
-      transform: scale(1.1);
-      -webkit-transform: scale(1.1);
+      transform: scale(1.2);
+      -webkit-transform: scale(1.2);
       z-index: 2;
     }
 
@@ -253,9 +253,35 @@
     }
 
     .hero-phone:nth-child(2):hover {
-      transform: scale(1.15);
-      -webkit-transform: scale(1.15);
+      transform: scale(1.25);
+      -webkit-transform: scale(1.25);
       z-index: 3;
+    }
+
+    .phone-video-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-video {
+      position: absolute;
+      width: 78%;
+      height: 89%;
+      top: 5.5%;
+      left: 11%;
+      object-fit: cover;
+      border-radius: 28px;
+      z-index: 1;
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      height: auto;
+      z-index: 2;
+      pointer-events: none;
     }
 
     /* Features Section */
@@ -664,8 +690,13 @@
         </div>
       </div>
       <div class="hero-phones">
-        <img src="assets/landing_phone_1_glow.png" alt="PogoTeams Lead Gameplan" class="hero-phone">
         <img src="assets/landing_phone_3_glow.png" alt="PogoTeams Rankings" class="hero-phone">
+        <div class="hero-phone phone-video-container">
+          <video class="phone-video" autoplay muted loop playsinline>
+            <source src="assets/screen_video.webm" type="video/webm">
+          </video>
+          <img src="assets/frame_glow.png" alt="" class="phone-frame">
+        </div>
       </div>
     </div>
   </section>
