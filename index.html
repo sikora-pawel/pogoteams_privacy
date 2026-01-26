@@ -525,7 +525,7 @@
     .cta-container {
       max-width: 800px;
       margin: 0 auto;
-      background: linear-gradient(135deg, rgba(166, 49, 216, 0.2) 0%, rgba(166, 49, 216, 0.05) 100%);
+      background: linear-gradient(135deg, rgba(166, 49, 216, 0.1) 0%, rgba(166, 49, 216, 0.02) 100%);
       border: 1px solid rgba(166, 49, 216, 0.3);
       border-radius: 30px;
       padding: 4rem 3rem;
@@ -536,11 +536,11 @@
     .cta-container::before {
       content: '';
       position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      top: -350px;
+      right: -350px;
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(166, 49, 216, 0.2) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -824,6 +824,13 @@
       .cta-container {
         padding: 3rem 1.5rem;
       }
+
+      .cta-container::before {
+        width: 600px;
+        height: 600px;
+        top: -225px;
+        right: -225px;
+      }
     }
 
     @media (max-width: 380px) {
@@ -1032,15 +1039,15 @@
     <div class="faq-grid">
       <div class="faq-item">
         <h3 class="faq-question">Is the app free?</h3>
-        <p class="faq-answer">Yes, completely free.</p>
+        <p class="faq-answer">Yes! Free to use with ads. You can remove them permanently with a small one-time purchase.</p>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">Is the app available on Android?</h3>
-        <p class="faq-answer">Currently iOS and Mac only. An Android version is being worked on — sign up above for early access.</p>
+        <p class="faq-answer">iOS and Mac now. Android version is complete and currently in Google Play's release process — sign up above to get early access before the official launch!</p>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">Can I import Pokémon directly from the game?</h3>
-        <p class="faq-answer">No — Pokémon GO's API is protected and third-party connections could result in a ban.</p>
+        <p class="faq-answer">No — for your account's safety. Pokémon GO's API is protected and third-party connections could result in a ban.</p>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">Do I have to enter my Pokémon every time?</h3>
