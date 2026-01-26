@@ -709,6 +709,8 @@
 
       .hero-subtitle {
         margin-bottom: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
       }
 
       .hero-phones::before {
@@ -779,6 +781,26 @@
         padding: 3rem 1.5rem;
       }
     }
+
+    @media (max-width: 380px) {
+      .store-btn img {
+        height: 40px;
+      }
+
+      .android-beta-input-row {
+        height: 40px;
+      }
+
+      .android-beta-input {
+        width: 100px;
+        font-size: 0.75rem;
+      }
+
+      .android-beta-btn {
+        padding: 0 0.5rem;
+        font-size: 0.75rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -828,7 +850,7 @@
       <div class="hero-phones">
         <img src="assets/landing_phone_3_glow.png" alt="PogoTeams Rankings" class="hero-phone">
         <div class="hero-phone phone-video-container">
-          <video class="phone-video" autoplay muted loop playsinline>
+          <video class="phone-video" autoplay muted loop playsinline poster="assets/screen-ios1.png">
             <source src="assets/screen_video.webm" type="video/webm">
           </video>
           <img src="assets/frame_glow.png" alt="" class="phone-frame">
