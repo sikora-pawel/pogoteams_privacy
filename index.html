@@ -694,6 +694,14 @@
       }
 
       .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+
+      .nav-desktop-only {
         display: none;
       }
 
@@ -811,8 +819,9 @@
       <img src="assets/logo_horizontal.png" alt="PogoTeams" class="nav-logo">
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
-        <li><a href="#screenshots">Screenshots</a></li>
-        <li><a href="support.html">Support</a></li>
+        <li class="nav-desktop-only"><a href="#screenshots">Screenshots</a></li>
+        <li><a href="#testimonials">Community</a></li>
+        <li class="nav-desktop-only"><a href="support.html">Support</a></li>
       </ul>
     </div>
   </nav>
