@@ -135,6 +135,37 @@
       flex-shrink: 0;
     }
 
+    h2.section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-answer {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
     footer {
       padding: 2rem;
       border-top: 1px solid rgba(166, 49, 216, 0.1);
@@ -190,6 +221,24 @@
         font-size: 0.9rem;
         line-height: 1.5;
       }
+
+      h2.section-title {
+        font-size: 1.3rem;
+        margin-top: 2.5rem;
+      }
+
+      .faq-item {
+        padding: 1.25rem;
+      }
+
+      .faq-question {
+        font-size: 0.95rem;
+      }
+
+      .faq-answer {
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
     }
   </style>
 </head>
@@ -230,6 +279,38 @@
         Before You Contact Us
       </h2>
       <p>Make sure you're running the latest version of PogoTeams from the App Store. Many issues are resolved in updates.</p>
+    </div>
+
+    <h2 class="section-title">Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h3 class="faq-question">Why do I keep getting the same teams?</h3>
+      <p class="faq-answer">The algorithm isn't random — it builds optimal teams based on your Pokémon. To get new suggestions, log opponent teams you face or enable "Advanced Builder Options" in Settings.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">Can I build a team around a specific Pokémon?</h3>
+      <p class="faq-answer">Yes! Go to Settings and enable "Advanced Builder Options." This unlocks a manual builder where you pick one Pokémon and the app suggests complementary teammates.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">Can I change movesets?</h3>
+      <p class="faq-answer">Not yet, but it's the #1 requested feature and coming soon.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">Are legacy/Elite TM moves marked?</h3>
+      <p class="faq-answer">Not currently, but this will be added in an upcoming update.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">The search bar isn't working — what do I do?</h3>
+      <p class="faq-answer">This is a known iOS bug. Try switching tabs, restarting the app, or reinstalling it.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">What does logging opponent teams do?</h3>
+      <p class="faq-answer">The app analyzes trends and builds teams specifically designed to counter what you're actually facing on ladder.</p>
     </div>
   </main>
 

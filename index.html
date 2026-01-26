@@ -483,6 +483,38 @@
       font-weight: 600;
     }
 
+    /* FAQ Section */
+    .faq {
+      padding: 6rem 2rem;
+    }
+
+    .faq-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .faq-question {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-answer {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
     /* CTA Section */
     .cta {
       padding: 6rem 2rem;
@@ -769,6 +801,23 @@
         line-height: 1.4;
       }
 
+      .faq {
+        padding: 4rem 1.5rem;
+      }
+
+      .faq-item {
+        padding: 1.25rem;
+      }
+
+      .faq-question {
+        font-size: 0.95rem;
+      }
+
+      .faq-answer {
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
       .cta-container {
         padding: 3rem 1.5rem;
       }
@@ -803,8 +852,8 @@
       <img src="assets/logo_horizontal.png" alt="PogoTeams" class="nav-logo">
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
-        <li><a href="#testimonials">Community</a></li>
-        <li class="nav-desktop-only"><a href="support.html">Support</a></li>
+        <li class="nav-desktop-only"><a href="#testimonials">Reviews</a></li>
+        <li><a href="support.html">Support</a></li>
       </ul>
     </div>
   </nav>
@@ -965,6 +1014,36 @@
       <div class="testimonial-card">
         <p class="testimonial-quote">"Holy arceus thats amazing! This will save me countless hours and Im not even kidding."</p>
         <p class="testimonial-author">— faeeebs</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="section-header">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3 class="faq-question">Is the app free?</h3>
+        <p class="faq-answer">Yes, completely free.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">Is the app available on Android?</h3>
+        <p class="faq-answer">Currently iOS and Mac only. An Android version is being worked on — sign up above for early access.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">Can I import Pokémon directly from the game?</h3>
+        <p class="faq-answer">No — Pokémon GO's API is protected and third-party connections could result in a ban.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">Do I have to enter my Pokémon every time?</h3>
+        <p class="faq-answer">No. You select them once and they're saved across all leagues and cups.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">What is "Lead Gameplan"?</h3>
+        <p class="faq-answer">For every saved team, you can view short, matchup-specific guides on how to play your lead against common opposing Pokémon.</p>
       </div>
     </div>
   </section>
