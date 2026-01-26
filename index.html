@@ -444,6 +444,46 @@
       transform: translateY(0);
     }
 
+    /* Testimonials Section */
+    .testimonials {
+      padding: 6rem 2rem;
+    }
+
+    .testimonials-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .testimonial-card:hover {
+      border-color: rgba(166, 49, 216, 0.4);
+    }
+
+    .testimonial-quote {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      color: var(--accent-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
     /* CTA Section */
     .cta {
       padding: 6rem 2rem;
@@ -787,6 +827,50 @@
           <img src="assets/landing_phone_4_glow.png" alt="Team Matchups">
           <div class="screenshot-label">Spot threats before they surprise you</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-header">
+      <span class="section-tag">Community</span>
+      <h2 class="section-title">What trainers are saying</h2>
+      <p class="section-subtitle">Real feedback from the PogoTeams Discord community.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"This app absolutely kicks ass, anyone on the fence reading this comment should download it if they have an iPhone."</p>
+        <p class="testimonial-author">— Debo37</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"First master league team it gave me I was getting crushed, so I logged 10 battles and it gave me a new team suggestion. Been winning 60-70% since then. Love this so SOOOOOOO much."</p>
+        <p class="testimonial-author">— Nemreaper</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Built a really fun team I wouldn't have considered and have gone 4-1 in the first set."</p>
+        <p class="testimonial-author">— smrad8</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I played only 15 games, this works well in elo like 1900-2100 where i live. Lost 3 games and won all the rest!"</p>
+        <p class="testimonial-author">— 4ccidentally_</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"As someone with zero knowledge on how PVP actually works & has to google everything, THANK YOU!!"</p>
+        <p class="testimonial-author">— Dapper_Sprinkles_369</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"As someone who loves PvP but struggles a lot with team building, this app is a life saver. Incredibly user friendly, simple and just tremendously useful."</p>
+        <p class="testimonial-author">— Mrb1057</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"That lead gameplan thing you've created looks sick."</p>
+        <p class="testimonial-author">— Fittelminger</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Holy arceus thats amazing! This will save me countless hours and Im not even kidding."</p>
+        <p class="testimonial-author">— faeeebs</p>
       </div>
     </div>
   </section>
