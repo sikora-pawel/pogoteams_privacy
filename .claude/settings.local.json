@@ -7,7 +7,8 @@
       "WebFetch(domain:play.google.com)",
       "WebFetch(domain:partnermarketinghub.withgoogle.com)",
       "Bash(ipconfig getifaddr:*)",
-      "Bash(sips:*)"
+      "Bash(sips:*)",
+      "Bash(brew list:*)"
     ]
   }
 }
