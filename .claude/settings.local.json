@@ -6,7 +6,8 @@
       "WebSearch",
       "WebFetch(domain:play.google.com)",
       "WebFetch(domain:partnermarketinghub.withgoogle.com)",
-      "Bash(ipconfig getifaddr:*)"
+      "Bash(ipconfig getifaddr:*)",
+      "Bash(sips:*)"
     ]
   }
 }
