@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PoGoTeams – PvP Team Builder for Pokémon GO</title>
-  <meta name="description" content="Build winning teams for Pokémon GO Battle League. Automatic team building, lead gameplans, and matchup analysis. Free iOS app for competitive PvP trainers.">
+  <meta name="description" content="Build winning teams for Pokémon GO Battle League. Automatic team building, lead gameplans, and matchup analysis. Free app for iOS and Android.">
   <meta name="keywords" content="Pokemon GO, PvP, team builder, battle league, GBL, Pokemon GO PvP, team building, lead gameplan, matchup analysis, Pokemon GO app">
   <meta name="theme-color" content="#120818">
   <meta name="format-detection" content="telephone=no">
@@ -39,7 +39,7 @@
     "name": "PoGoTeams",
     "description": "Build winning teams for Pokémon GO Battle League. Automatic team building, lead gameplans, and matchup analysis.",
     "applicationCategory": "GameApplication",
-    "operatingSystem": "iOS, macOS",
+    "operatingSystem": "iOS, macOS, Android",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -91,7 +91,7 @@
         "name": "Is the app available on Android?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "iOS and Mac now. Android version is complete and currently in Google Play's release process — sign up to get early access before the official launch!"
+          "text": "Yes! Available on iOS, Mac, and Android. Download it from the App Store or Google Play."
         }
       },
       {
@@ -292,79 +292,6 @@
     .store-btn img {
       height: 52px;
       width: auto;
-    }
-
-    .android-beta-form {
-      position: relative;
-      display: flex;
-      margin-left: 1rem;
-    }
-
-    .android-beta-label {
-      position: absolute;
-      top: -1.4rem;
-      left: 0;
-      font-size: 0.7rem;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .android-beta-label svg {
-      width: 12px;
-      height: 12px;
-      fill: var(--accent-light);
-      transform: translateY(-1px);
-    }
-
-    .android-beta-input-row {
-      display: flex;
-      gap: 0.5rem;
-      height: 52px;
-      align-items: center;
-      transform: translateY(-3px);
-    }
-
-    .android-beta-input {
-      padding: 0 0.8rem;
-      height: 100%;
-      border: 1px solid rgba(166, 49, 216, 0.3);
-      border-radius: 8px;
-      background: rgba(18, 8, 24, 0.8);
-      color: var(--text);
-      font-size: 0.85rem;
-      width: 180px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .android-beta-input:focus {
-      border-color: var(--accent);
-    }
-
-    .android-beta-input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .android-beta-btn {
-      padding: 0 1rem;
-      height: 100%;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .android-beta-btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
     }
 
     .hero-phones {
@@ -855,23 +782,6 @@
         height: 44px;
       }
 
-      .android-beta-input-row {
-        height: 44px;
-      }
-
-      .android-beta-input {
-        width: 122px;
-        padding: 0 0.5rem;
-      }
-
-      .android-beta-form {
-        margin-left: 0;
-      }
-
-      .android-beta-btn {
-        padding: 0 0.7rem;
-      }
-
       .store-buttons {
         margin-top: 2rem;
       }
@@ -946,20 +856,6 @@
       .store-btn img {
         height: 40px;
       }
-
-      .android-beta-input-row {
-        height: 40px;
-      }
-
-      .android-beta-input {
-        width: 100px;
-        font-size: 0.75rem;
-      }
-
-      .android-beta-btn {
-        padding: 0 0.5rem;
-        font-size: 0.75rem;
-      }
     }
   </style>
 </head>
@@ -992,19 +888,9 @@
           <a href="ios.html" class="store-btn">
             <img src="assets/app-store-badge.svg" alt="Download on the App Store">
           </a>
-          <form class="android-beta-form" action="https://formsubmit.co/pogoteambuilder@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="PoGoTeams Android Early Access">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://pogoteams.app/thanks.html">
-            <span class="android-beta-label">
-              <svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
-              Android Early Access
-            </span>
-            <div class="android-beta-input-row">
-              <input type="email" name="email" class="android-beta-input" placeholder="your@email.com" required>
-              <button type="submit" class="android-beta-btn">Get</button>
-            </div>
-          </form>
+          <a href="android.html" class="store-btn">
+            <img src="assets/google-play-badge.svg" alt="Get it on Google Play">
+          </a>
         </div>
       </div>
       <div class="hero-phones">
@@ -1152,7 +1038,7 @@
       </div>
       <div class="faq-item">
         <h3 class="faq-question">Is the app available on Android?</h3>
-        <p class="faq-answer">iOS and Mac now. Android version is complete and currently in Google Play's release process — sign up above to get early access before the official launch!</p>
+        <p class="faq-answer">Yes! Available on iOS, Mac, and Android. Download it from the App Store or Google Play.</p>
       </div>
       <div class="faq-item">
         <h3 class="faq-question">Can I import Pokémon directly from the game?</h3>
@@ -1179,19 +1065,9 @@
         <a href="ios.html" class="store-btn">
           <img src="assets/app-store-badge.svg" alt="Download on the App Store">
         </a>
-        <form class="android-beta-form" action="https://formsubmit.co/pogoteambuilder@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="PoGoTeams Android Early Access">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://pogoteams.app/thanks.html">
-          <span class="android-beta-label">
-            <svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
-            Android Early Access
-          </span>
-          <div class="android-beta-input-row">
-            <input type="email" name="email" class="android-beta-input" placeholder="your@email.com" required>
-            <button type="submit" class="android-beta-btn">Get</button>
-          </div>
-        </form>
+        <a href="android.html" class="store-btn">
+          <img src="assets/google-play-badge.svg" alt="Get it on Google Play">
+        </a>
       </div>
     </div>
   </section>
