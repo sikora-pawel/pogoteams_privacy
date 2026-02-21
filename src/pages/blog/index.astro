@@ -1,0 +1,363 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | PoGoTeams</title>
+  <meta name="description" content="PoGoTeams blog — PvP strategy guides, app updates, and tips for Pokémon GO Battle League.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="PoGoTeams">
+  <meta name="theme-color" content="#120818">
+  <link rel="canonical" href="https://pogoteams.app/blog">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog | PoGoTeams">
+  <meta property="og:description" content="PvP strategy guides, app updates, and tips for Pokémon GO Battle League.">
+  <meta property="og:image" content="https://pogoteams.app/og-image.jpg">
+  <meta property="og:image:secure_url" content="https://pogoteams.app/og-image.jpg">
+  <meta property="og:url" content="https://pogoteams.app/blog">
+  <meta property="og:site_name" content="PoGoTeams">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Blog | PoGoTeams">
+  <meta name="twitter:description" content="PvP strategy guides, app updates, and tips for Pokémon GO Battle League.">
+  <meta name="twitter:image" content="https://pogoteams.app/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "PoGoTeams Blog",
+    "description": "PvP strategy guides, app updates, and tips for Pokémon GO Battle League.",
+    "url": "https://pogoteams.app/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "PoGoTeams",
+      "url": "https://pogoteams.app"
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/app-icon.png">
+  <link rel="apple-touch-icon" href="/icon180.png">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #120818;
+      --bg-card: #1a0f1f;
+      --accent: #A631D8;
+      --accent-light: #c45ef0;
+      --text-primary: #ffffff;
+      --text-secondary: #b8a8c0;
+      --text-muted: #6b5a73;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      background: rgba(18, 8, 24, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-light);
+    }
+
+    /* Blog listing */
+    .blog-listing {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .blog-listing-header {
+      margin-bottom: 3rem;
+    }
+
+    .blog-listing-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-listing-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .blog-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .blog-post-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 16px;
+      padding: 1.75rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: block;
+    }
+
+    .blog-post-card:hover {
+      border-color: rgba(166, 49, 216, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .blog-post-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .blog-post-card-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-post-card-meta {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .blog-post-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .blog-tag {
+      background: rgba(166, 49, 216, 0.15);
+      color: var(--accent-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .blog-empty {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 4rem 0;
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      height: 36px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-disclaimer {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .blog-listing {
+        padding: 5rem 1.5rem 2rem;
+      }
+
+      .blog-post-card {
+        padding: 1.25rem;
+      }
+
+      .blog-post-card-title {
+        font-size: 1.05rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-content">
+      <a href="/"><img src="/assets/logo_horizontal.png" alt="PoGoTeams" class="nav-logo"></a>
+      <ul class="nav-links">
+        <li><a href="/blog" class="active">Blog</a></li>
+        <li><a href="/support.html">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-listing">
+    <header class="blog-listing-header">
+      <h1 class="blog-listing-title">Blog</h1>
+      <p class="blog-listing-subtitle">Strategy guides, app updates, and PvP tips.</p>
+    </header>
+
+    {posts.length > 0 ? (
+      <div class="blog-posts">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="blog-post-card">
+            <h2 class="blog-post-card-title">{post.data.title}</h2>
+            <p class="blog-post-card-description">{post.data.description}</p>
+            <div class="blog-post-card-meta">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              {post.data.tags.length > 0 && (
+                <div class="blog-post-card-tags">
+                  {post.data.tags.map((tag: string) => (
+                    <span class="blog-tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="blog-empty">No posts yet. Check back soon!</p>
+    )}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <a href="/"><img src="/assets/logo_horizontal.png" alt="PoGoTeams" class="footer-logo"></a>
+      <ul class="footer-links">
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/support.html">Support</a></li>
+      </ul>
+      <p class="footer-disclaimer">
+        PoGoTeams is a companion planning tool and does not connect to Pokémon GO directly.<br>
+        Pokémon GO is a trademark of Niantic, Inc. This app is not affiliated with or endorsed by Niantic.
+      </p>
+      <p class="footer-copyright">&copy; 2026 PoGoTeams. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "229b36c080104f4f808b7b4ddd334d3d"}'></script>
+</body>
+</html>

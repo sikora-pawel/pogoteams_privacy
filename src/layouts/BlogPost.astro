@@ -1,0 +1,508 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags?: string[];
+}
+
+const { title, description, pubDate, updatedDate, tags = [] } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} | PoGoTeams Blog</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="PoGoTeams">
+  <meta name="theme-color" content="#120818">
+  <link rel="canonical" href={canonicalURL}>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content="https://pogoteams.app/og-image.jpg">
+  <meta property="og:image:secure_url" content="https://pogoteams.app/og-image.jpg">
+  <meta property="og:url" content={canonicalURL}>
+  <meta property="og:site_name" content="PoGoTeams">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content={pubDate.toISOString()}>
+  {updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()}>}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="https://pogoteams.app/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalURL,
+    },
+    "headline": title,
+    "description": description,
+    "image": "https://pogoteams.app/og-image.jpg",
+    "author": {
+      "@type": "Organization",
+      "name": "PoGoTeams",
+      "url": "https://pogoteams.app",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "PoGoTeams",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://pogoteams.app/assets/app-icon.png",
+      },
+    },
+    "datePublished": pubDate.toISOString(),
+    ...(updatedDate ? { "dateModified": updatedDate.toISOString() } : {}),
+    "keywords": tags,
+  })} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/app-icon.png">
+  <link rel="apple-touch-icon" href="/icon180.png">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #120818;
+      --bg-card: #1a0f1f;
+      --accent: #A631D8;
+      --accent-light: #c45ef0;
+      --text-primary: #ffffff;
+      --text-secondary: #b8a8c0;
+      --text-muted: #6b5a73;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      background: rgba(18, 8, 24, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Blog Post */
+    .blog-post {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .blog-post-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(166, 49, 216, 0.15);
+    }
+
+    .blog-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      transition: opacity 0.2s;
+    }
+
+    .blog-back:hover {
+      opacity: 0.8;
+    }
+
+    .blog-post-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .blog-post-meta {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .blog-post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .blog-tag {
+      background: rgba(166, 49, 216, 0.15);
+      color: var(--accent-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Blog content (Markdown) */
+    .blog-content {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .blog-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .blog-content h3 {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-content p {
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-content a {
+      color: var(--accent-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .blog-content a:hover {
+      opacity: 0.8;
+    }
+
+    .blog-content ul,
+    .blog-content ol {
+      margin-bottom: 1.25rem;
+      padding-left: 1.5rem;
+    }
+
+    .blog-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-content li::marker {
+      color: var(--accent-light);
+    }
+
+    .blog-content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .blog-content blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .blog-content code {
+      background: rgba(166, 49, 216, 0.1);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .blog-content pre {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 12px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-content pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .blog-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .blog-content hr {
+      border: none;
+      border-top: 1px solid rgba(166, 49, 216, 0.15);
+      margin: 2rem 0;
+    }
+
+    /* CTA at bottom of post */
+    .blog-cta {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(166, 49, 216, 0.1) 0%, rgba(166, 49, 216, 0.02) 100%);
+      border: 1px solid rgba(166, 49, 216, 0.3);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .blog-cta p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .blog-cta-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .store-btn {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .store-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .store-btn img {
+      height: 44px;
+      width: auto;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      height: 36px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-disclaimer {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .blog-post {
+        padding: 5rem 1.5rem 2rem;
+      }
+
+      .blog-post-title {
+        font-size: 1.5rem;
+      }
+
+      .blog-content {
+        font-size: 0.95rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-content">
+      <a href="/"><img src="/assets/logo_horizontal.png" alt="PoGoTeams" class="nav-logo"></a>
+      <ul class="nav-links">
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/support.html">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <article class="blog-post">
+    <header class="blog-post-header">
+      <a href="/blog" class="blog-back">&larr; All posts</a>
+      <h1 class="blog-post-title">{title}</h1>
+      <div class="blog-post-meta">
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {updatedDate && <span>· Updated {formattedUpdatedDate}</span>}
+      </div>
+      {tags.length > 0 && (
+        <div class="blog-post-tags">
+          {tags.map((tag) => <span class="blog-tag">{tag}</span>)}
+        </div>
+      )}
+    </header>
+
+    <div class="blog-content">
+      <slot />
+    </div>
+
+    <div class="blog-cta">
+      <p class="blog-cta-title">Try PoGoTeams for free</p>
+      <p>Build winning PvP teams with automatic team building and lead gameplans.</p>
+      <div class="store-buttons">
+        <a href="/ios.html" class="store-btn">
+          <img src="/assets/app-store-badge.svg" alt="Download on the App Store">
+        </a>
+        <a href="/android.html" class="store-btn">
+          <img src="/assets/google-play-badge.svg" alt="Get it on Google Play">
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <a href="/"><img src="/assets/logo_horizontal.png" alt="PoGoTeams" class="footer-logo"></a>
+      <ul class="footer-links">
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/support.html">Support</a></li>
+      </ul>
+      <p class="footer-disclaimer">
+        PoGoTeams is a companion planning tool and does not connect to Pokémon GO directly.<br>
+        Pokémon GO is a trademark of Niantic, Inc. This app is not affiliated with or endorsed by Niantic.
+      </p>
+      <p class="footer-copyright">&copy; 2026 PoGoTeams. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "229b36c080104f4f808b7b4ddd334d3d"}'></script>
+</body>
+</html>

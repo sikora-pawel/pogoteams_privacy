@@ -1,3 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const softwareAppSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PoGoTeams",
+  "description": "Build winning teams for Pokémon GO Battle League. Automatic team building, lead gameplans, and matchup analysis.",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "iOS, macOS, Android",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "50" },
+  "author": { "@type": "Organization", "name": "PoGoTeams" },
+  "url": "https://pogoteams.app/",
+  "image": "https://pogoteams.app/assets/app-icon.png",
+  "downloadUrl": "https://apps.apple.com/us/app/pogoteams-pvp-team-builder/id6755302593"
+});
+
+const webSiteSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "PoGoTeams",
+  "url": "https://pogoteams.app/",
+  "description": "PvP Team Builder for Pokémon GO Battle League",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://pogoteams.app/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+});
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the app free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes! Free to use with ads. You can remove them permanently with a small one-time purchase." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the app available on Android?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes! Available on iOS, Mac, and Android. Download it from the App Store or Google Play." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I import Pokémon directly from the game?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No — for your account's safety. Pokémon GO's API is protected and third-party connections could result in a ban." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to enter my Pokémon every time?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. You select them once and they're saved across all leagues and cups." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Lead Gameplan?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For every saved team, you can view short, matchup-specific guides on how to play your lead against common opposing Pokémon." }
+    }
+  ]
+});
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,95 +100,9 @@
   <meta name="twitter:image" content="https://pogoteams.app/og-image.jpg">
 
   <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "PoGoTeams",
-    "description": "Build winning teams for Pokémon GO Battle League. Automatic team building, lead gameplans, and matchup analysis.",
-    "applicationCategory": "GameApplication",
-    "operatingSystem": "iOS, macOS, Android",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "ratingCount": "50"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "PoGoTeams"
-    },
-    "url": "https://pogoteams.app/",
-    "image": "https://pogoteams.app/assets/app-icon.png",
-    "downloadUrl": "https://apps.apple.com/us/app/pogoteams-pvp-team-builder/id6755302593"
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "PoGoTeams",
-    "url": "https://pogoteams.app/",
-    "description": "PvP Team Builder for Pokémon GO Battle League",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://pogoteams.app/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is the app free?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes! Free to use with ads. You can remove them permanently with a small one-time purchase."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is the app available on Android?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes! Available on iOS, Mac, and Android. Download it from the App Store or Google Play."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I import Pokémon directly from the game?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No — for your account's safety. Pokémon GO's API is protected and third-party connections could result in a ban."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do I have to enter my Pokémon every time?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. You select them once and they're saved across all leagues and cups."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is Lead Gameplan?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "For every saved team, you can view short, matchup-specific guides on how to play your lead against common opposing Pokémon."
-        }
-      }
-    ]
-  }
-  </script>
+  <script type="application/ld+json" set:html={softwareAppSchema} />
+  <script type="application/ld+json" set:html={webSiteSchema} />
+  <script type="application/ld+json" set:html={faqSchema} />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,7 +112,7 @@
   <link rel="icon" type="image/png" href="https://pogoteams.app/app-icon.png">
   <link rel="apple-touch-icon" href="https://pogoteams.app/icon180.png">
 
-  <style>
+  <style is:global>
     * {
       margin: 0;
       padding: 0;
@@ -473,7 +455,7 @@
     }
 
     .feature-list li::before {
-      content: '✓';
+      content: '\2713';
       position: absolute;
       left: 0;
       color: var(--accent-light);
@@ -518,6 +500,82 @@
       color: var(--accent-light);
       font-size: 0.85rem;
       font-weight: 600;
+    }
+
+    /* What's New Section */
+    .whats-new {
+      padding: 6rem 2rem;
+    }
+
+    .whats-new-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .whats-new-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: block;
+    }
+
+    .whats-new-card:hover {
+      border-color: rgba(166, 49, 216, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .whats-new-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .whats-new-card-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .whats-new-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .whats-new-card-date {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .whats-new-card-link {
+      color: var(--accent-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .whats-new-all {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .whats-new-all a {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+
+    .whats-new-all a:hover {
+      opacity: 0.8;
     }
 
     /* FAQ Section */
@@ -840,6 +898,22 @@
         line-height: 1.5;
       }
 
+      .whats-new {
+        padding: 4rem 1.5rem;
+      }
+
+      .whats-new-card {
+        padding: 1.25rem;
+      }
+
+      .whats-new-card-title {
+        font-size: 1rem;
+      }
+
+      .whats-new-card-description {
+        font-size: 0.9rem;
+      }
+
       .cta-container {
         padding: 3rem 1.5rem;
       }
@@ -868,6 +942,7 @@
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
         <li class="nav-desktop-only"><a href="#testimonials">Reviews</a></li>
+        <li><a href="/blog">Blog</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
     </div>
@@ -1025,6 +1100,35 @@
     </div>
   </section>
 
+  <!-- What's New Section -->
+  {posts.length > 0 && (
+    <section class="whats-new">
+      <div class="section-header">
+        <h2 class="section-title">What's New</h2>
+        <p class="section-subtitle">Latest updates, guides, and PvP tips.</p>
+      </div>
+
+      <div class="whats-new-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="whats-new-card">
+            <h3 class="whats-new-card-title">{post.data.title}</h3>
+            <p class="whats-new-card-description">{post.data.description}</p>
+            <div class="whats-new-card-footer">
+              <time class="whats-new-card-date" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <span class="whats-new-card-link">Read more &rarr;</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="whats-new-all">
+        <a href="/blog">View all posts &rarr;</a>
+      </div>
+    </section>
+  )}
+
   <!-- FAQ Section -->
   <section class="faq" id="faq">
     <div class="section-header">
@@ -1077,6 +1181,7 @@
     <div class="footer-content">
       <img src="assets/logo_horizontal.png" alt="PoGoTeams" class="footer-logo">
       <ul class="footer-links">
+        <li><a href="/blog">Blog</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
@@ -1084,10 +1189,10 @@
         PoGoTeams is a companion planning tool and does not connect to Pokémon GO directly.<br>
         Pokémon GO is a trademark of Niantic, Inc. This app is not affiliated with or endorsed by Niantic.
       </p>
-      <p class="footer-copyright">© 2026 PoGoTeams. All rights reserved.</p>
+      <p class="footer-copyright">&copy; 2026 PoGoTeams. All rights reserved.</p>
     </div>
   </footer>
 
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "229b36c080104f4f808b7b4ddd334d3d"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script is:inline defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "229b36c080104f4f808b7b4ddd334d3d"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
