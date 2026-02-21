@@ -28,7 +28,9 @@
       "WebFetch(domain:pogoteams.app)",
       "WebFetch(domain:github.com)",
       "Bash(echo GitHub API not available:*)",
-      "WebFetch(domain:apps.apple.com)"
+      "WebFetch(domain:apps.apple.com)",
+      "Bash(curl:*)",
+      "Bash(cat:*)"
     ]
   }
 }
