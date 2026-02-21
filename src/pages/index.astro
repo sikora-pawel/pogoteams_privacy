@@ -454,6 +454,20 @@ const faqSchema = JSON.stringify({
       position: relative;
     }
 
+    .feature-link {
+      display: inline-block;
+      margin-top: 1.25rem;
+      color: var(--accent-light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .feature-link:hover {
+      opacity: 0.8;
+    }
+
     .feature-list li::before {
       content: '\2713';
       position: absolute;
@@ -1036,6 +1050,7 @@ const faqSchema = JSON.stringify({
             <li>Compare how different movesets perform side by side</li>
             <li>Full battle simulation for every non-standard moveset</li>
           </ul>
+          <a href="/blog/custom-movesets-guide" class="feature-link">Learn how to use Custom Movesets &rarr;</a>
         </div>
       </div>
 
