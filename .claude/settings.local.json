@@ -13,7 +13,9 @@
       "Bash(node --version:*)",
       "Bash(npm --version:*)",
       "Bash(npm install:*)",
-      "Bash(npx astro build:*)"
+      "Bash(npx astro build:*)",
+      "Bash(cd:*)",
+      "Bash(cd /Users/pawelsikora/screenshotTool && python3 generate_landing_page.py --id landing_phone_5_glow 2>&1)"
     ]
   }
 }
