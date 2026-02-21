@@ -15,7 +15,20 @@
       "Bash(npm install:*)",
       "Bash(npx astro build:*)",
       "Bash(cd:*)",
-      "Bash(cd /Users/pawelsikora/screenshotTool && python3 generate_landing_page.py --id landing_phone_5_glow 2>&1)"
+      "Bash(cd /Users/pawelsikora/screenshotTool && python3 generate_landing_page.py --id landing_phone_5_glow 2>&1)",
+      "Bash(npx astro:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "Bash(gh run:*)",
+      "WebFetch(domain:www.reddit.com)",
+      "WebFetch(domain:old.reddit.com)",
+      "WebFetch(domain:www.lurrker.com)",
+      "WebFetch(domain:subredditstats.com)",
+      "WebFetch(domain:camas.unddit.com)",
+      "WebFetch(domain:pogoteams.app)",
+      "WebFetch(domain:github.com)",
+      "Bash(echo GitHub API not available:*)",
+      "WebFetch(domain:apps.apple.com)"
     ]
   }
 }
