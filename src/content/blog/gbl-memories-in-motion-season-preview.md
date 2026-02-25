@@ -21,20 +21,7 @@ The app will reload with Memories in Motion data — updated rankings, new cup f
 
 When you're done exploring, toggle it off to go back to the current season's data. Both datasets are cached separately, so switching is quick.
 
-## What's changing in Memories in Motion
-
-The season brings some notable move rebalances and new cup formats:
-
-- **Drain Punch** power doubled (20 → 40)
-- **Sand Tomb** power increased (25 → 40)
-- **Twister** reworked (45 → 70)
-- **Low Kick** buffed (4 → 5)
-- **Heat Wave** nerfed (95 → 75)
-- Several Pokémon gaining new moves — Gliscor, Moltres, Heracross, Garchomp, and more
-
-Cup rotation includes Kanto Cup, Spring Cup, Jungle Cup, Electric Cup, Fantasy Cup, and Catch Cup alongside the standard Great/Ultra/Master League formats.
-
-Full details on the [official announcement](https://pokemongo.com/news/go-battle-league-memories-in-motion).
+Full season details on the [official announcement](https://pokemongo.com/news/go-battle-league-memories-in-motion).
 
 ## Keep in mind
 
