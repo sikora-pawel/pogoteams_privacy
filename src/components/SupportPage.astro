@@ -1,0 +1,165 @@
+---
+import { getCollection } from 'astro:content';
+import StaticPageLayout from '../layouts/StaticPageLayout.astro';
+import { type Locale } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const all = await getCollection('legal');
+const entry =
+  all.find((e) => e.id === `${lang}/support`) ??
+  all.find((e) => e.id === 'en/support');
+
+if (!entry) {
+  throw new Error('legal/en/support.md is missing');
+}
+const data = entry.data;
+const cards = data.cards ?? [];
+const faqItems = data.faqItems ?? [];
+const isFallback = !entry.id.startsWith(`${lang}/`);
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+});
+---
+<StaticPageLayout
+  lang={lang}
+  pageKey="support"
+  title={data.title}
+  description={data.description}
+>
+  <script type="application/ld+json" slot="head" set:html={faqSchema} />
+
+  <div lang={isFallback ? 'en' : undefined}>
+    <h1>{data.title}</h1>
+    {data.intro && <p class="intro">{data.intro}</p>}
+
+    {cards.map((card) => (
+      <div class="support-card">
+        <h2>
+          {card.icon === 'email' ? (
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          ) : (
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          )}
+          {card.title}
+        </h2>
+        <p>{card.body}</p>
+        {card.buttonText && card.buttonHref && (
+          <a href={card.buttonHref} class="btn">{card.buttonText}</a>
+        )}
+      </div>
+    ))}
+
+    {data.faqTitle && <h2 class="section-title">{data.faqTitle}</h2>}
+    {faqItems.map((item) => (
+      <div class="faq-item">
+        <h3 class="faq-question">{item.question}</h3>
+        <p class="faq-answer">{item.answer}</p>
+      </div>
+    ))}
+  </div>
+</StaticPageLayout>
+
+<style>
+  .intro {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+  .support-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(166, 49, 216, 0.15);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .support-card:hover { border-color: rgba(166, 49, 216, 0.4); }
+  .support-card h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .support-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .support-card a.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .support-card a.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(166, 49, 216, 0.4);
+  }
+  .icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid rgba(166, 49, 216, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .faq-question {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .faq-answer {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  @media (max-width: 600px) {
+    .intro { font-size: 0.95rem; line-height: 1.5; }
+    .support-card { padding: 1.5rem; }
+    .support-card h2 { font-size: 1rem; }
+    .support-card p { font-size: 0.9rem; line-height: 1.5; }
+    .section-title { font-size: 1.3rem; margin-top: 2.5rem; }
+    .faq-item { padding: 1.25rem; }
+    .faq-question { font-size: 0.95rem; }
+    .faq-answer { font-size: 0.9rem; line-height: 1.5; }
+  }
+</style>

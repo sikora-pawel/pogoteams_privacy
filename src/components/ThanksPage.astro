@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import StaticPageLayout from '../layouts/StaticPageLayout.astro';
+import { localizedPath, type Locale } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const all = await getCollection('legal');
+const entry =
+  all.find((e) => e.id === `${lang}/thanks`) ??
+  all.find((e) => e.id === 'en/thanks');
+
+if (!entry) {
+  throw new Error('legal/en/thanks.md is missing');
+}
+const data = entry.data;
+const isFallback = !entry.id.startsWith(`${lang}/`);
+const homePath = localizedPath('/', lang);
+---
+<StaticPageLayout
+  lang={lang}
+  pageKey="thanks"
+  title={data.title}
+  description={data.description}
+  noindex
+  simple
+>
+  <div lang={isFallback ? 'en' : undefined}>
+    <img src="/assets/logo_vertical.png" alt="PoGoTeams" class="logo">
+    {data.heading && <h1>{data.heading}</h1>}
+    {data.subheading && <p class="subheading">{data.subheading}</p>}
+    {data.note && <p class="note">{data.note}</p>}
+    {data.backLink && <a href={homePath} class="back-link">{data.backLink}</a>}
+  </div>
+</StaticPageLayout>
+
+<style>
+  .logo {
+    height: 200px;
+    margin-bottom: 0;
+  }
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+  .subheading {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+  .note {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    color: var(--text-secondary);
+    max-width: 400px;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+  .back-link {
+    color: var(--accent-light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  @media (max-width: 600px) {
+    .logo { height: 140px; }
+    h1 { font-size: 1.6rem; }
+    .subheading { font-size: 0.95rem; line-height: 1.5; }
+  }
+</style>

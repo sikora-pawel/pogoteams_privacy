@@ -154,6 +154,9 @@
     "ctaTitle": "Wypróbuj PoGoTeams za darmo",
     "ctaText": "Buduj zwycięskie drużyny PvP dzięki automatycznemu builderowi i Lead Gameplanom."
   },
+  "legal": {
+    "backToHome": "Powrót do strony głównej"
+  },
   "langSwitcher": {
     "label": "Język",
     "names": {

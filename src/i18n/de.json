@@ -59,16 +59,16 @@
       ]
     },
     "customMovesets": {
-      "title": "Eigene Attackensätze",
-      "description": "Definiere die Attackensätze, die Du tatsächlich nutzt, und erhalte überall präzise Analysen — Teamaufbau, Bewertung und Kampfsimulationen berücksichtigen Deine echten Attacken.",
-      "imageAlt": "Eigene Attackensätze",
+      "title": "Eigene Movesets",
+      "description": "Definiere die Movesets, die Du tatsächlich nutzt, und erhalte überall präzise Analysen — Teamaufbau, Bewertung und Kampfsimulationen berücksichtigen Deine echten Attacken.",
+      "imageAlt": "Eigene Movesets",
       "items": [
-        "Erstelle für jedes Pokémon im Ranking eigene Attackensatz-Varianten",
+        "Erstelle für jedes Pokémon im Ranking eigene Moveset-Varianten",
         "Die App testet alle Varianten automatisch und wählt die beste aus",
-        "Vergleiche verschiedene Attackensätze direkt nebeneinander",
-        "Vollständige Kampfsimulation für jeden eigenen Attackensatz"
+        "Vergleiche verschiedene Movesets direkt nebeneinander",
+        "Vollständige Kampfsimulation für jedes eigene Moveset"
       ],
-      "linkText": "Erfahre, wie Du eigene Attackensätze nutzt →",
+      "linkText": "Erfahre, wie Du eigene Movesets nutzt →",
       "linkSlug": "custom-movesets-guide"
     },
     "rankings": {
@@ -78,7 +78,7 @@
       "items": [
         "Durchstöbere Rankings nach Cup und Rolle",
         "Markiere Deine Pokémon einmal und nutze sie in allen Ligen und Cups",
-        "Sieh die empfohlenen Attackensätze für jedes gerankte Pokémon",
+        "Sieh die empfohlenen Movesets für jedes gerankte Pokémon",
         "Suche nach Namen, Attacken oder Typ und finde, wonach Du suchst"
       ]
     },
@@ -153,6 +153,9 @@
     "updated": "Aktualisiert",
     "ctaTitle": "Probiere PoGoTeams kostenlos",
     "ctaText": "Baue siegreiche PvP-Teams mit automatischem Builder und Lead Gameplans."
+  },
+  "legal": {
+    "backToHome": "Zurück zur Startseite"
   },
   "langSwitcher": {
     "label": "Sprache",

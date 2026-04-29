@@ -154,6 +154,9 @@
     "ctaTitle": "PoGoTeams を無料で試す",
     "ctaText": "自動ビルダーとリード対策で、勝てる PvP パーティを構築しよう。"
   },
+  "legal": {
+    "backToHome": "ホームに戻る"
+  },
   "langSwitcher": {
     "label": "言語",
     "names": {

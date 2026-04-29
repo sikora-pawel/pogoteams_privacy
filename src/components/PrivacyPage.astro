@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import StaticPageLayout from '../layouts/StaticPageLayout.astro';
+import { type Locale } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const all = await getCollection('legal');
+const entry =
+  all.find((e) => e.id === `${lang}/privacy`) ??
+  all.find((e) => e.id === 'en/privacy');
+
+if (!entry) {
+  throw new Error('legal/en/privacy.md is missing');
+}
+const data = entry.data;
+const sections = data.sections ?? [];
+const isFallback = !entry.id.startsWith(`${lang}/`);
+---
+<StaticPageLayout
+  lang={lang}
+  pageKey="privacy"
+  title={data.title}
+  description={data.description}
+>
+  <h1>{data.title}</h1>
+  {data.lastUpdated && <p class="last-updated">{data.lastUpdated}</p>}
+  <div class="content-card" lang={isFallback ? 'en' : undefined}>
+    {sections.map((section) => (
+      <>
+        <h2>{section.heading}</h2>
+        <p set:html={section.body} />
+      </>
+    ))}
+  </div>
+</StaticPageLayout>
+
+<style>
+  .last-updated {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+  }
+  .content-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(166, 49, 216, 0.15);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .content-card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+  .content-card h2:first-child { margin-top: 0; }
+  .content-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 600px) {
+    .content-card { padding: 1.5rem; }
+    .content-card h2 { font-size: 1.1rem; }
+    .content-card p { font-size: 0.9rem; line-height: 1.5; }
+  }
+</style>

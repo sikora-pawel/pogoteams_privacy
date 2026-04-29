@@ -154,6 +154,9 @@
     "ctaTitle": "Try PoGoTeams for free",
     "ctaText": "Build winning PvP teams with automatic team building and lead gameplans."
   },
+  "legal": {
+    "backToHome": "Back to Home"
+  },
   "langSwitcher": {
     "label": "Language",
     "names": {

@@ -36,6 +36,15 @@ const pathname = Astro.url.pathname;
 const featureLinkSlug = t.features.customMovesets.linkSlug;
 const featureLinkPath = localizedPath(`/blog/${featureLinkSlug}`, lang);
 
+// Localized store badges live at /assets/badges/{appstore,googleplay}/<locale>.<ext>.
+// All 8 locales (en/pl/de/ja/es/fr/it/pt-br) shipped for both stores. ES uses
+// LATAM Spanish (es-mx black variant from Apple toolbox / es-419 from Google).
+// See public/assets/badges/README.md for source URLs and refresh instructions.
+const APPLE_BADGE_LOCALES = new Set(['en', 'pl', 'de', 'ja', 'es', 'fr', 'it', 'pt-br']);
+const GOOGLE_BADGE_LOCALES = new Set(['en', 'pl', 'de', 'ja', 'es', 'fr', 'it', 'pt-br']);
+const appStoreBadgeSrc = `/assets/badges/appstore/${APPLE_BADGE_LOCALES.has(lang) ? lang : 'en'}.svg`;
+const googlePlayBadgeSrc = `/assets/badges/googleplay/${GOOGLE_BADGE_LOCALES.has(lang) ? lang : 'en'}.png`;
+
 const softwareAppSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -1004,10 +1013,10 @@ const testimonials = [
         </p>
         <div class="store-buttons">
           <a href={iosPath} class="store-btn">
-            <img src="/assets/app-store-badge.svg" alt={t.hero.appStoreAlt}>
+            <img src={appStoreBadgeSrc} alt={t.hero.appStoreAlt}>
           </a>
           <a href={androidPath} class="store-btn">
-            <img src="/assets/google-play-badge.svg" alt={t.hero.googlePlayAlt}>
+            <img src={googlePlayBadgeSrc} alt={t.hero.googlePlayAlt}>
           </a>
         </div>
       </div>

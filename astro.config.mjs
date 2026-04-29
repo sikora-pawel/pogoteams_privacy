@@ -37,6 +37,10 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  // Backward-compat for `/privacy.html`, `/support.html`, `/thanks.html` is
+  // handled by literal meta-refresh files in `public/` — Astro's `redirects`
+  // config emits `<url>/index.html` (a directory), which 404s on GitHub Pages
+  // when the old app webview requests the URL without a trailing slash.
   integrations: [
     sitemap({
       i18n: {
@@ -48,11 +52,9 @@ export default defineConfig({
           ja: 'ja-JP',
         },
       },
-      customPages: [
-        'https://pogoteams.app/',
-        'https://pogoteams.app/support.html',
-        'https://pogoteams.app/privacy.html',
-      ],
+      // Exclude the legacy `*.html` redirect files — only real pages
+      // (which use directory format and end in `/`) belong in the sitemap.
+      filter: (page) => !/\.html$/.test(page),
     }),
   ],
   vite: {
