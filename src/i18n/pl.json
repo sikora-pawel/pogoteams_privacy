@@ -7,14 +7,14 @@
   },
   "meta": {
     "title": "PoGoTeams – Team Builder PvP do Pokémon GO",
-    "description": "Twórz wygrywające drużyny do Pokémon GO Battle League. Automatyczne budowanie drużyn, Lead Gameplany i analiza matchupów. Darmowa aplikacja na iOS i Androida.",
-    "keywords": "Pokemon GO, PvP, team builder, battle league, GBL, Pokemon GO PvP, drużyny, lead gameplan, matchupy, aplikacja Pokemon GO",
+    "description": "Twórz wygrywające drużyny do Pokémon GO Battle League. Automatyczne budowanie drużyn, Lead Gameplany i analiza pojedynków. Darmowa aplikacja na iOS i Androida.",
+    "keywords": "Pokemon GO, PvP, team builder, battle league, GBL, Pokemon GO PvP, drużyny, lead gameplan, matchupy, pojedynki, aplikacja Pokemon GO",
     "ogTitle": "PoGoTeams – Team Builder PvP do Pokémon GO",
     "ogDescription": "Twórz wygrywające drużyny do Pokémon GO Battle League dzięki automatycznemu builderowi i strategicznym Lead Gameplanom.",
     "ogImageAlt": "PoGoTeams – Team Builder PvP do Pokémon GO"
   },
   "structuredData": {
-    "appDescription": "Twórz wygrywające drużyny do Pokémon GO Battle League. Automatyczne budowanie drużyn, Lead Gameplany i analiza matchupów.",
+    "appDescription": "Twórz wygrywające drużyny do Pokémon GO Battle League. Automatyczne budowanie drużyn, Lead Gameplany i analiza pojedynków.",
     "siteDescription": "Team Builder PvP do Pokémon GO Battle League"
   },
   "nav": {
@@ -28,67 +28,67 @@
     "titlePart1": "Buduj",
     "titleHighlight": "zwycięskie",
     "titlePart2": "drużyny PvP w Pokémon GO",
-    "subtitle": "Twórz drużyny PvP w oparciu o sprawdzone zasady team buildingu z gry na najwyższym poziomie. Planuj leady na podstawie matchupów, a nie zgadywania. Pnij się w rankingu z realną przewagą.",
+    "subtitle": "Twórz drużyny PvP według sprawdzonych zasad stosowanych w grze na najwyższym poziomie. Planuj otwarcie walki w oparciu o analizę pojedynków, a nie zgadywanie. Pnij się w rankingu z realną przewagą.",
     "appStoreAlt": "Pobierz w App Store",
     "googlePlayAlt": "Pobierz w Google Play",
     "phone1Alt": "Rankingi PoGoTeams"
   },
   "features": {
     "sectionTitle": "Narzędzia stworzone dla trenerów PvP",
-    "sectionSubtitle": "Stosuj sprawdzone koncepcje team buildingu i konkretne reguły decyzyjne wykorzystywane w high-level PvP w Pokémon GO.",
+    "sectionSubtitle": "Stosuj sprawdzone zasady budowania drużyn i konkretne reguły decyzyjne wykorzystywane w PvP w Pokémon GO na najwyższym poziomie.",
     "teamBuilding": {
       "title": "Automatyczny builder",
-      "description": "Generuj drużyny w oparciu o reguły stosowane w high-level PvP: balans ról, pokrycie i bezpieczne switche.",
+      "description": "Generuj drużyny w oparciu o reguły stosowane w PvP na najwyższym poziomie: balans ról, pokrycie i bezpieczne zmiany.",
       "imageAlt": "Automatyczny team builder",
       "items": [
         "Buduj drużyny z Pokémonów, które posiadasz",
         "Buduj wokół dowolnego Pokémona, a otrzymasz skuteczną drużynę",
-        "Korzystaj z zapisanych przeciwników, by wykryć popularne picki i core'y",
-        "Generuj drużyny dopasowane do meta, jaką spotykasz w grze"
+        "Korzystaj z zapisanych przeciwników, by wykryć najczęściej grane Pokémony i ich kombinacje",
+        "Generuj drużyny dopasowane do mety, jaką spotykasz w grze"
       ]
     },
     "leadGameplans": {
       "title": "Lead Gameplan",
-      "description": "Planuj rozgrywkę swojego leada w oparciu o jasne reguły decyzyjne. Koniec ze zgadywaniem na początku walki.",
+      "description": "Planuj otwarcie walki w oparciu o jasne reguły decyzyjne. Koniec ze zgadywaniem, co robić na początku.",
       "imageAlt": "Lead Gameplan",
       "items": [
-        "Świadomie decyduj, kiedy zostać w matchupie, a kiedy switchować",
+        "Świadomie decyduj, kiedy zostać w pojedynku, a kiedy zmienić Pokémona",
         "Naucz się, kiedy używać tarcz, a kiedy je zachować",
-        "Otrzymuj wskazówki, kiedy baitować, a kiedy blokować ataki tarczą",
-        "Zobacz, jak matchupy zmieniają się w różnych scenariuszach tarcz"
+        "Otrzymuj wskazówki, kiedy zwodzić przeciwnika, a kiedy blokować jego ataki tarczą",
+        "Zobacz, jak pojedynki zmieniają się w różnych scenariuszach tarcz"
       ]
     },
     "customMovesets": {
-      "title": "Własne movesety",
-      "description": "Zdefiniuj movesety, których faktycznie używasz, i otrzymuj precyzyjną analizę w każdym narzędziu — team building, punktacja i symulacje walk uwzględniają Twoje rzeczywiste ruchy.",
-      "imageAlt": "Własne movesety",
+      "title": "Własne zestawy ruchów",
+      "description": "Zdefiniuj zestawy ruchów, których faktycznie używasz, i otrzymuj precyzyjną analizę w każdym narzędziu — budowanie drużyn, punktacja i symulacje walk uwzględniają Twoje rzeczywiste ruchy.",
+      "imageAlt": "Własne zestawy ruchów",
       "items": [
-        "Dodawaj warianty movesetów do dowolnego Pokémona w rankingach",
+        "Dodawaj warianty zestawów ruchów do dowolnego Pokémona w rankingach",
         "Aplikacja automatycznie testuje wszystkie warianty i wybiera najlepszy",
-        "Porównuj wydajność różnych movesetów obok siebie",
-        "Pełna symulacja walki dla każdego niestandardowego movesetu"
+        "Porównuj wydajność różnych zestawów ruchów obok siebie",
+        "Pełna symulacja walki dla każdego niestandardowego zestawu ruchów"
       ],
-      "linkText": "Dowiedz się, jak korzystać z własnych movesetów →",
+      "linkText": "Dowiedz się, jak korzystać z własnych zestawów ruchów →",
       "linkSlug": "custom-movesets-guide"
     },
     "rankings": {
       "title": "Rankingi Pokémonów",
-      "description": "Zobacz, jak Pokémony radzą sobie w pucharach i rolach. Zaznacz te, które masz. Twoja kolekcja staje się fundamentem automatycznego team buildingu.",
+      "description": "Zobacz, jak Pokémony radzą sobie w pucharach i rolach. Zaznacz te, które masz. Twoja kolekcja staje się fundamentem automatycznego budowania drużyn.",
       "imageAlt": "Rankingi Pokémonów",
       "items": [
         "Przeglądaj rankingi po pucharach i rolach",
         "Zaznacz posiadane Pokémony raz, używaj ich we wszystkich ligach i pucharach",
-        "Zobacz polecane movesety dla każdego Pokémona z rankingu",
-        "Wyszukuj po nazwie, ruchach lub typingu i znajdź to, czego szukasz"
+        "Zobacz polecane zestawy ruchów dla każdego Pokémona z rankingu",
+        "Wyszukuj po nazwie, ruchach lub typach i znajdź to, czego szukasz"
       ]
     },
     "matchupAnalysis": {
-      "title": "Analiza matchupów",
-      "description": "Oceniaj drużyny według znanych metryk PvP: pokrycie, spójność, bulk i pewność.",
-      "imageAlt": "Matchupy drużyn",
+      "title": "Analiza pojedynków",
+      "description": "Oceniaj drużyny według znanych wskaźników PvP: pokrycie, spójność, wytrzymałość i pewność.",
+      "imageAlt": "Pojedynki drużyn",
       "items": [
-        "Rozpisy matchupów przeciwko popularnym pickom i zapisanym przeciwnikom",
-        "Identyfikuj najbardziej niebezpieczne matchupy każdej drużyny",
+        "Rozpisy pojedynków przeciwko popularnym Pokémonom i zapisanym przeciwnikom",
+        "Identyfikuj najbardziej niebezpieczne pojedynki dla każdej drużyny",
         "Manualny builder z sugestiami opartymi na regułach"
       ]
     }
@@ -124,13 +124,13 @@
       },
       {
         "question": "Co to jest „Lead Gameplan”?",
-        "answer": "Dla każdej zapisanej drużyny zobaczysz krótkie, dopasowane do matchupu wskazówki, jak grać swoim leadem przeciwko popularnym Pokémonom przeciwnika."
+        "answer": "Dla każdej zapisanej drużyny zobaczysz krótkie wskazówki dopasowane do konkretnych pojedynków — jak rozegrać otwarcie przeciwko popularnym Pokémonom przeciwnika."
       }
     ]
   },
   "cta": {
     "title": "Gotowy, by przestać zgadywać i zacząć wygrywać?",
-    "subtitle": "Buduj mądrzejsze drużyny. Planuj leady. Pnij się w rankingu."
+    "subtitle": "Buduj mądrzejsze drużyny. Planuj otwarcia. Pnij się w rankingu."
   },
   "footer": {
     "blog": "Blog",
