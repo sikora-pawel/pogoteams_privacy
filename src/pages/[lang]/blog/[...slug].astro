@@ -1,0 +1,52 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { type Locale } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const enPosts = posts.filter((p) => p.id.startsWith('en/'));
+  const targetLocales: Locale[] = ['pl', 'de', 'ja'];
+
+  const paths = [];
+  for (const lang of targetLocales) {
+    const localePosts = posts.filter((p) => p.id.startsWith(`${lang}/`));
+    const localeSlugs = new Set(localePosts.map((p) => p.id.replace(`${lang}/`, '')));
+
+    // Native-locale posts
+    for (const post of localePosts) {
+      paths.push({
+        params: { lang, slug: post.id.replace(`${lang}/`, '') },
+        props: { post, contentLang: lang },
+      });
+    }
+    // EN fallback for slugs not yet translated to this locale
+    for (const post of enPosts) {
+      const slug = post.id.replace(/^en\//, '');
+      if (!localeSlugs.has(slug)) {
+        paths.push({
+          params: { lang, slug },
+          props: { post, contentLang: 'en' as Locale },
+        });
+      }
+    }
+  }
+  return paths;
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const { post, contentLang } = Astro.props as { post: any; contentLang: Locale };
+const { Content } = await render(post);
+---
+
+<BlogPost
+  lang={lang}
+  contentLang={contentLang}
+  title={post.data.title}
+  description={post.data.description}
+  pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
+  tags={post.data.tags}
+>
+  <Content />
+</BlogPost>

@@ -1,0 +1,166 @@
+{
+  "lang": {
+    "html": "pl",
+    "ogLocale": "pl_PL",
+    "dateLocale": "pl-PL",
+    "nativeName": "Polski"
+  },
+  "meta": {
+    "title": "PoGoTeams – Team Builder PvP do Pokémon GO",
+    "description": "Twórz wygrywające drużyny do Pokémon GO Battle League. Automatyczne budowanie drużyn, Lead Gameplany i analiza matchupów. Darmowa aplikacja na iOS i Androida.",
+    "keywords": "Pokemon GO, PvP, team builder, battle league, GBL, Pokemon GO PvP, drużyny, lead gameplan, matchupy, aplikacja Pokemon GO",
+    "ogTitle": "PoGoTeams – Team Builder PvP do Pokémon GO",
+    "ogDescription": "Twórz wygrywające drużyny do Pokémon GO Battle League dzięki automatycznemu builderowi i strategicznym Lead Gameplanom.",
+    "ogImageAlt": "PoGoTeams – Team Builder PvP do Pokémon GO"
+  },
+  "structuredData": {
+    "appDescription": "Twórz wygrywające drużyny do Pokémon GO Battle League. Automatyczne budowanie drużyn, Lead Gameplany i analiza matchupów.",
+    "siteDescription": "Team Builder PvP do Pokémon GO Battle League"
+  },
+  "nav": {
+    "features": "Funkcje",
+    "reviews": "Opinie",
+    "blog": "Blog",
+    "support": "Pomoc",
+    "home": "Start"
+  },
+  "hero": {
+    "titlePart1": "Buduj",
+    "titleHighlight": "zwycięskie",
+    "titlePart2": "drużyny PvP w Pokémon GO",
+    "subtitle": "Twórz drużyny PvP w oparciu o sprawdzone zasady team buildingu z gry na najwyższym poziomie. Planuj leady na podstawie matchupów, a nie zgadywania. Pnij się w rankingu z realną przewagą.",
+    "appStoreAlt": "Pobierz w App Store",
+    "googlePlayAlt": "Pobierz w Google Play",
+    "phone1Alt": "Rankingi PoGoTeams"
+  },
+  "features": {
+    "sectionTitle": "Narzędzia stworzone dla trenerów PvP",
+    "sectionSubtitle": "Stosuj sprawdzone koncepcje team buildingu i konkretne reguły decyzyjne wykorzystywane w high-level PvP w Pokémon GO.",
+    "teamBuilding": {
+      "title": "Automatyczny builder",
+      "description": "Generuj drużyny w oparciu o reguły stosowane w high-level PvP: balans ról, pokrycie i bezpieczne switche.",
+      "imageAlt": "Automatyczny team builder",
+      "items": [
+        "Buduj drużyny z Pokémonów, które posiadasz",
+        "Buduj wokół dowolnego Pokémona, a otrzymasz skuteczną drużynę",
+        "Korzystaj z zapisanych przeciwników, by wykryć popularne picki i core'y",
+        "Generuj drużyny dopasowane do meta, jaką spotykasz w grze"
+      ]
+    },
+    "leadGameplans": {
+      "title": "Lead Gameplan",
+      "description": "Planuj rozgrywkę swojego leada w oparciu o jasne reguły decyzyjne. Koniec ze zgadywaniem na początku walki.",
+      "imageAlt": "Lead Gameplan",
+      "items": [
+        "Świadomie decyduj, kiedy zostać w matchupie, a kiedy switchować",
+        "Naucz się, kiedy używać tarcz, a kiedy je zachować",
+        "Otrzymuj wskazówki, kiedy baitować, a kiedy blokować ataki tarczą",
+        "Zobacz, jak matchupy zmieniają się w różnych scenariuszach tarcz"
+      ]
+    },
+    "customMovesets": {
+      "title": "Własne movesety",
+      "description": "Zdefiniuj movesety, których faktycznie używasz, i otrzymuj precyzyjną analizę w każdym narzędziu — team building, punktacja i symulacje walk uwzględniają Twoje rzeczywiste ruchy.",
+      "imageAlt": "Własne movesety",
+      "items": [
+        "Dodawaj warianty movesetów do dowolnego Pokémona w rankingach",
+        "Aplikacja automatycznie testuje wszystkie warianty i wybiera najlepszy",
+        "Porównuj wydajność różnych movesetów obok siebie",
+        "Pełna symulacja walki dla każdego niestandardowego movesetu"
+      ],
+      "linkText": "Dowiedz się, jak korzystać z własnych movesetów →",
+      "linkSlug": "custom-movesets-guide"
+    },
+    "rankings": {
+      "title": "Rankingi Pokémonów",
+      "description": "Zobacz, jak Pokémony radzą sobie w pucharach i rolach. Zaznacz te, które masz. Twoja kolekcja staje się fundamentem automatycznego team buildingu.",
+      "imageAlt": "Rankingi Pokémonów",
+      "items": [
+        "Przeglądaj rankingi po pucharach i rolach",
+        "Zaznacz posiadane Pokémony raz, używaj ich we wszystkich ligach i pucharach",
+        "Zobacz polecane movesety dla każdego Pokémona z rankingu",
+        "Wyszukuj po nazwie, ruchach lub typingu i znajdź to, czego szukasz"
+      ]
+    },
+    "matchupAnalysis": {
+      "title": "Analiza matchupów",
+      "description": "Oceniaj drużyny według znanych metryk PvP: pokrycie, spójność, bulk i pewność.",
+      "imageAlt": "Matchupy drużyn",
+      "items": [
+        "Rozpisy matchupów przeciwko popularnym pickom i zapisanym przeciwnikom",
+        "Identyfikuj najbardziej niebezpieczne matchupy każdej drużyny",
+        "Manualny builder z sugestiami opartymi na regułach"
+      ]
+    }
+  },
+  "testimonials": {
+    "title": "Co mówią trenerzy",
+    "subtitle": "Prawdziwe opinie ze społeczności Reddita oraz recenzji w App Store i Google Play."
+  },
+  "whatsNew": {
+    "title": "Co nowego",
+    "subtitle": "Najnowsze aktualizacje, poradniki i wskazówki PvP.",
+    "readMore": "Czytaj więcej →",
+    "viewAll": "Zobacz wszystkie wpisy →"
+  },
+  "faq": {
+    "title": "Najczęściej zadawane pytania",
+    "items": [
+      {
+        "question": "Czy aplikacja jest darmowa?",
+        "answer": "Tak! Korzystanie jest bezpłatne (z reklamami). Możesz je trwale wyłączyć drobnym jednorazowym zakupem."
+      },
+      {
+        "question": "Czy aplikacja jest dostępna na Androida?",
+        "answer": "Tak! Dostępna na iOS, Maca i Androida. Pobierz ją z App Store lub Google Play."
+      },
+      {
+        "question": "Czy mogę zaimportować Pokémony bezpośrednio z gry?",
+        "answer": "Nie — dla bezpieczeństwa Twojego konta. API Pokémon GO jest chronione, a łączenie się z zewnętrznymi aplikacjami może skutkować banem."
+      },
+      {
+        "question": "Czy muszę wybierać Pokémony za każdym razem?",
+        "answer": "Nie. Wystarczy wybrać je raz — zostaną zapisane dla wszystkich lig i pucharów."
+      },
+      {
+        "question": "Co to jest „Lead Gameplan”?",
+        "answer": "Dla każdej zapisanej drużyny zobaczysz krótkie, dopasowane do matchupu wskazówki, jak grać swoim leadem przeciwko popularnym Pokémonom przeciwnika."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Gotowy, by przestać zgadywać i zacząć wygrywać?",
+    "subtitle": "Buduj mądrzejsze drużyny. Planuj leady. Pnij się w rankingu."
+  },
+  "footer": {
+    "blog": "Blog",
+    "privacy": "Polityka prywatności",
+    "support": "Pomoc",
+    "disclaimerLine1": "PoGoTeams to pomocnicze narzędzie do planowania i nie łączy się bezpośrednio z Pokémon GO.",
+    "disclaimerLine2": "Pokémon GO jest znakiem towarowym firmy Niantic, Inc. Aplikacja nie jest powiązana z Niantic ani przez Niantic rekomendowana.",
+    "copyright": "© 2026 PoGoTeams. Wszelkie prawa zastrzeżone."
+  },
+  "blog": {
+    "indexTitle": "Blog | PoGoTeams",
+    "indexHeading": "Blog",
+    "indexSubtitle": "Poradniki strategiczne, aktualizacje aplikacji i wskazówki PvP.",
+    "indexMetaDescription": "Blog PoGoTeams — poradniki strategiczne PvP, aktualizacje aplikacji i wskazówki do Pokémon GO Battle League.",
+    "indexOgDescription": "Poradniki strategiczne PvP, aktualizacje aplikacji i wskazówki do Pokémon GO Battle League.",
+    "blogName": "Blog PoGoTeams",
+    "empty": "Brak wpisów na razie. Zajrzyj wkrótce!",
+    "postTitleSuffix": "Blog PoGoTeams",
+    "backToAll": "← Wszystkie wpisy",
+    "updated": "Zaktualizowano",
+    "ctaTitle": "Wypróbuj PoGoTeams za darmo",
+    "ctaText": "Buduj zwycięskie drużyny PvP dzięki automatycznemu builderowi i Lead Gameplanom."
+  },
+  "langSwitcher": {
+    "label": "Język",
+    "names": {
+      "en": "English",
+      "pl": "Polski",
+      "de": "Deutsch",
+      "ja": "日本語"
+    }
+  }
+}

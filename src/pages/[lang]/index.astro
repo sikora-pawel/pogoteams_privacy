@@ -1,0 +1,17 @@
+---
+import HomePage from '../../components/HomePage.astro';
+import { type Locale } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  // EN is served by /index.astro (no prefix per `prefixDefaultLocale: false`).
+  return [
+    { params: { lang: 'pl' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'ja' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: Locale };
+---
+
+<HomePage lang={lang} />

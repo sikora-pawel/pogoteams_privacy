@@ -1,0 +1,56 @@
+---
+import { locales, type Locale, getDictionary, swapLocaleInPath } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const dict = getDictionary(lang);
+---
+
+<div class="lang-switcher" aria-label={dict.langSwitcher.label}>
+  {locales.map((loc) => (
+    <a
+      href={swapLocaleInPath(pathname, loc)}
+      class:list={['lang-link', { active: loc === lang }]}
+      hreflang={loc}
+      lang={loc}
+      aria-current={loc === lang ? 'true' : undefined}
+    >
+      {dict.langSwitcher.names[loc]}
+    </a>
+  ))}
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .lang-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+    border: 1px solid rgba(166, 49, 216, 0.15);
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+  }
+
+  .lang-link:hover {
+    color: var(--accent-light);
+    border-color: rgba(166, 49, 216, 0.4);
+  }
+
+  .lang-link.active {
+    color: var(--text-primary);
+    background: rgba(166, 49, 216, 0.15);
+    border-color: rgba(166, 49, 216, 0.4);
+  }
+</style>

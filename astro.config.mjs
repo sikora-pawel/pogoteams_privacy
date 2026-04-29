@@ -30,8 +30,24 @@ function servePublicHtml() {
 
 export default defineConfig({
   site: 'https://pogoteams.app',
+  i18n: {
+    locales: ['en', 'pl', 'de', 'ja'],
+    defaultLocale: 'en',
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [
     sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en-US',
+          pl: 'pl-PL',
+          de: 'de-DE',
+          ja: 'ja-JP',
+        },
+      },
       customPages: [
         'https://pogoteams.app/',
         'https://pogoteams.app/support.html',

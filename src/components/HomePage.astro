@@ -1,0 +1,1208 @@
+---
+import { getCollection } from 'astro:content';
+import { getDictionary, locales, localizedPath, type Locale, formatDate } from '../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import AutoLocale from './AutoLocale.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+
+// Posts for the "What's New" section: filter to current locale, fall back to EN
+// when the current locale has no posts yet.
+const allPosts = await getCollection('blog');
+const localePrefix = `${lang}/`;
+let posts = allPosts.filter((p) => p.id.startsWith(localePrefix));
+if (posts.length === 0 && lang !== 'en') {
+  posts = allPosts.filter((p) => p.id.startsWith('en/'));
+}
+posts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const blogPath = localizedPath('/blog', lang);
+const supportPath = '/support.html';
+const privacyPath = '/privacy.html';
+const iosPath = '/ios.html';
+const androidPath = '/android.html';
+const homePath = localizedPath('/', lang);
+
+const canonicalURL = new URL(localizedPath('/', lang), Astro.site).toString();
+const pathname = Astro.url.pathname;
+
+const featureLinkSlug = t.features.customMovesets.linkSlug;
+const featureLinkPath = localizedPath(`/blog/${featureLinkSlug}`, lang);
+
+const softwareAppSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PoGoTeams",
+  "description": t.structuredData.appDescription,
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "iOS, macOS, Android",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "50" },
+  "author": { "@type": "Organization", "name": "PoGoTeams" },
+  "url": canonicalURL,
+  "image": "https://pogoteams.app/assets/app-icon.png",
+  "downloadUrl": "https://apps.apple.com/us/app/pogoteams-pvp-team-builder/id6755302593"
+});
+
+const webSiteSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "PoGoTeams",
+  "url": "https://pogoteams.app/",
+  "description": t.structuredData.siteDescription,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://pogoteams.app/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+});
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": t.faq.items.map((item) => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+  }))
+});
+
+// Real reviewer testimonials — quotes are kept in their original English to preserve authenticity.
+const testimonials = [
+  { quote: '"This app absolutely kicks ass, anyone on the fence reading this comment should download it if they have an iPhone."', author: '— Debo37' },
+  { quote: '"First master league team it gave me I was getting crushed, so I logged 10 battles and it gave me a new team suggestion. Been winning 60-70% since then. Love this so SOOOOOOO much."', author: '— Nemreaper' },
+  { quote: '"Built a really fun team I wouldn\'t have considered and have gone 4-1 in the first set."', author: '— smrad8' },
+  { quote: '"I played only 15 games, this works well in elo like 1900-2100 where i live. Lost 3 games and won all the rest!"', author: '— 4ccidentally_' },
+  { quote: '"As someone with zero knowledge on how PVP actually works & has to google everything, THANK YOU!!"', author: '— Dapper_Sprinkles_369' },
+  { quote: '"As someone who loves PvP but struggles a lot with team building, this app is a life saver. Incredibly user friendly, simple and just tremendously useful."', author: '— Mrb1057' },
+  { quote: '"That lead gameplan thing you\'ve created looks sick."', author: '— Fittelminger' },
+  { quote: '"Holy arceus thats amazing! This will save me countless hours and Im not even kidding."', author: '— faeeebs' },
+];
+---
+
+<!DOCTYPE html>
+<html lang={t.lang.html}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{t.meta.title}</title>
+  <meta name="description" content={t.meta.description}>
+  <meta name="keywords" content={t.meta.keywords}>
+  <meta name="theme-color" content="#120818">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="PoGoTeams">
+  <link rel="canonical" href={canonicalURL}>
+
+  <!-- hreflang alternates -->
+  {locales.map((loc) => (
+    <link rel="alternate" hreflang={loc} href={new URL(localizedPath('/', loc), Astro.site).toString()} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).toString()} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={t.meta.ogTitle}>
+  <meta property="og:description" content={t.meta.ogDescription}>
+  <meta property="og:image" content="https://pogoteams.app/og-image.jpg">
+  <meta property="og:image:secure_url" content="https://pogoteams.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content={t.meta.ogImageAlt}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonicalURL}>
+  <meta property="og:site_name" content="PoGoTeams">
+  <meta property="og:locale" content={t.lang.ogLocale}>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={t.meta.ogTitle}>
+  <meta name="twitter:description" content={t.meta.ogDescription}>
+  <meta name="twitter:image" content="https://pogoteams.app/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={softwareAppSchema} />
+  <script type="application/ld+json" set:html={webSiteSchema} />
+  <script type="application/ld+json" set:html={faqSchema} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/app-icon.png">
+  <link rel="apple-touch-icon" href="/icon180.png">
+
+  <AutoLocale />
+
+  <style is:global>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #120818;
+      --bg-card: #1a0f1f;
+      --accent: #A631D8;
+      --accent-light: #c45ef0;
+      --accent-glow: rgba(166, 49, 216, 0.4);
+      --text-primary: #ffffff;
+      --text-secondary: #b8a8c0;
+      --text-muted: #6b5a73;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      background: rgba(18, 8, 24, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -400px;
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle at center, rgba(166, 49, 216, 0.15) 0%, rgba(166, 49, 216, 0.06) 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .hero-graphic {
+      width: 480px;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      margin-top: 5rem;
+    }
+
+    .store-btn {
+      display: inline-block;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .store-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .store-btn img {
+      height: 52px;
+      width: auto;
+    }
+
+    .hero-phones {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+    }
+
+    .hero-phones::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-45%, -50%);
+      width: 700px;
+      height: 800px;
+      background: radial-gradient(ellipse at center, rgba(166, 49, 216, 0.6) 0%, rgba(166, 49, 216, 0.3) 35%, rgba(166, 49, 216, 0.1) 55%, transparent 75%);
+      filter: blur(50px);
+      -webkit-filter: blur(50px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-phone {
+      width: 280px;
+      height: auto;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+      -webkit-transition: transform 0.3s ease;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .hero-phone:nth-child(1) {
+      transform: translateX(40px) rotate(-5deg);
+      -webkit-transform: translateX(40px) rotate(-5deg);
+      z-index: 1;
+    }
+
+    .hero-phone:nth-child(2) {
+      transform: scale(1.2);
+      -webkit-transform: scale(1.2);
+      z-index: 2;
+    }
+
+    .hero-phone:nth-child(1):hover {
+      transform: translateX(40px) rotate(-5deg) scale(1.05);
+      -webkit-transform: translateX(40px) rotate(-5deg) scale(1.05);
+      z-index: 3;
+    }
+
+    .hero-phone:nth-child(2):hover {
+      transform: scale(1.25);
+      -webkit-transform: scale(1.25);
+      z-index: 3;
+    }
+
+    .phone-video-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-video {
+      position: absolute;
+      width: 78%;
+      height: 89%;
+      top: 5.5%;
+      left: 11%;
+      object-fit: cover;
+      border-radius: 28px;
+      z-index: 1;
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      height: auto;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .features-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 5rem;
+    }
+
+    .feature-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-row--reversed {
+      direction: rtl;
+    }
+
+    .feature-row--reversed > * {
+      direction: ltr;
+    }
+
+    .feature-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    .feature-image img {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s;
+    }
+
+    .feature-image img:hover {
+      transform: scale(1.03);
+    }
+
+    .feature-content {
+      max-width: 480px;
+    }
+
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .feature-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .feature-list {
+      margin-top: 1.25rem;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .feature-list li {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .feature-link {
+      display: inline-block;
+      margin-top: 1.25rem;
+      color: var(--accent-light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .feature-link:hover {
+      opacity: 0.8;
+    }
+
+    .feature-list li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      padding: 6rem 2rem;
+    }
+
+    .testimonials-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .testimonial-card:hover {
+      border-color: rgba(166, 49, 216, 0.4);
+    }
+
+    .testimonial-quote {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      color: var(--accent-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* What's New Section */
+    .whats-new {
+      padding: 6rem 2rem;
+    }
+
+    .whats-new-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .whats-new-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: block;
+    }
+
+    .whats-new-card:hover {
+      border-color: rgba(166, 49, 216, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .whats-new-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .whats-new-card-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .whats-new-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .whats-new-card-date {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .whats-new-card-link {
+      color: var(--accent-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .whats-new-all {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .whats-new-all a {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+
+    .whats-new-all a:hover {
+      opacity: 0.8;
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 6rem 2rem;
+    }
+
+    .faq-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(166, 49, 216, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .faq-question {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-answer {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(166, 49, 216, 0.1) 0%, rgba(166, 49, 216, 0.02) 100%);
+      border: 1px solid rgba(166, 49, 216, 0.3);
+      border-radius: 30px;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-container::before {
+      content: '';
+      position: absolute;
+      top: -350px;
+      right: -350px;
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(166, 49, 216, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-mascots {
+      width: 140px;
+      margin-bottom: 1rem;
+    }
+
+    .cta-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .cta-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta .store-buttons {
+      justify-content: center;
+      row-gap: 3rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(166, 49, 216, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      height: 36px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .footer-disclaimer {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+      }
+
+      .hero-text {
+        max-width: 100%;
+      }
+
+      .store-buttons {
+        justify-content: center;
+      }
+
+      .hero-graphic {
+        display: none;
+      }
+
+      .hero-phones {
+        order: -1;
+      }
+
+      .hero-phones::before {
+        width: 500px;
+        height: 570px;
+        filter: blur(35px);
+        -webkit-filter: blur(35px);
+      }
+
+      .hero-phone {
+        width: 200px;
+      }
+
+      .hero-phone:nth-child(1) {
+        transform: translateX(30px) rotate(-5deg);
+        -webkit-transform: translateX(30px) rotate(-5deg);
+      }
+
+      .hero-phone:nth-child(1):hover {
+        transform: translateX(30px) rotate(-5deg) scale(1.05);
+        -webkit-transform: translateX(30px) rotate(-5deg) scale(1.05);
+      }
+
+      .hero-phone:nth-child(2):hover {
+        transform: scale(1.15);
+        -webkit-transform: scale(1.15);
+      }
+
+      .feature-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .feature-row--reversed {
+        direction: ltr;
+      }
+
+      .feature-content {
+        max-width: 100%;
+        text-align: left;
+      }
+
+      .feature-image img {
+        max-width: 220px;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+
+      .nav-desktop-only {
+        display: none;
+      }
+
+      .phone-video {
+        border-radius: 22px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 5rem 1.5rem 2rem;
+      }
+
+      .hero-subtitle {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .hero-phones::before {
+        width: 380px;
+        height: 440px;
+        filter: blur(30px);
+        -webkit-filter: blur(30px);
+      }
+
+      .hero-phone {
+        width: 140px;
+      }
+
+      .hero-phone:nth-child(1) {
+        transform: translateX(20px) rotate(-5deg);
+        -webkit-transform: translateX(20px) rotate(-5deg);
+      }
+
+      .hero-phone:nth-child(1):hover {
+        transform: translateX(20px) rotate(-5deg) scale(1.05);
+        -webkit-transform: translateX(20px) rotate(-5deg) scale(1.05);
+      }
+
+      .hero-phone:nth-child(2):hover {
+        transform: scale(1.15);
+        -webkit-transform: scale(1.15);
+      }
+
+      .phone-video {
+        border-radius: 18px;
+      }
+
+      .store-btn img {
+        height: 44px;
+      }
+
+      .store-buttons {
+        margin-top: 2rem;
+      }
+
+      .section-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      .feature-row {
+        margin-bottom: 3rem;
+      }
+
+      .feature-image img {
+        max-width: 180px;
+      }
+
+      .feature-title {
+        font-size: 1.25rem;
+      }
+
+      .feature-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .feature-list li {
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+
+      .testimonial-quote {
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+
+      .cta-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      .faq {
+        padding: 4rem 1.5rem;
+      }
+
+      .faq-item {
+        padding: 1.25rem;
+      }
+
+      .faq-question {
+        font-size: 0.95rem;
+      }
+
+      .faq-answer {
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .whats-new {
+        padding: 4rem 1.5rem;
+      }
+
+      .whats-new-card {
+        padding: 1.25rem;
+      }
+
+      .whats-new-card-title {
+        font-size: 1rem;
+      }
+
+      .whats-new-card-description {
+        font-size: 0.9rem;
+      }
+
+      .cta-container {
+        padding: 3rem 1.5rem;
+      }
+
+      .cta-container::before {
+        width: 600px;
+        height: 600px;
+        top: -225px;
+        right: -225px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .store-btn img {
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-content">
+      <a href={homePath}><img src="/assets/logo_horizontal.png" alt="PoGoTeams" class="nav-logo"></a>
+      <ul class="nav-links">
+        <li><a href={`${homePath}#features`}>{t.nav.features}</a></li>
+        <li class="nav-desktop-only"><a href={`${homePath}#testimonials`}>{t.nav.reviews}</a></li>
+        <li><a href={blogPath}>{t.nav.blog}</a></li>
+        <li><a href={supportPath}>{t.nav.support}</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <img src="/assets/logo_vertical.png" alt="PoGoTeams" class="hero-graphic">
+        <h1 class="hero-title">
+          {t.hero.titlePart1} <span class="highlight">{t.hero.titleHighlight}</span> {t.hero.titlePart2}
+        </h1>
+        <p class="hero-subtitle">
+          {t.hero.subtitle}
+        </p>
+        <div class="store-buttons">
+          <a href={iosPath} class="store-btn">
+            <img src="/assets/app-store-badge.svg" alt={t.hero.appStoreAlt}>
+          </a>
+          <a href={androidPath} class="store-btn">
+            <img src="/assets/google-play-badge.svg" alt={t.hero.googlePlayAlt}>
+          </a>
+        </div>
+      </div>
+      <div class="hero-phones">
+        <img src="/assets/landing_phone_3_glow.png" alt={t.hero.phone1Alt} class="hero-phone">
+        <div class="hero-phone phone-video-container">
+          <video class="phone-video" autoplay muted loop playsinline poster="/assets/screen-ios1.png">
+            <source src="/assets/screen_video.webm" type="video/webm">
+          </video>
+          <img src="/assets/frame_glow.png" alt="" class="phone-frame">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2 class="section-title">{t.features.sectionTitle}</h2>
+      <p class="section-subtitle">{t.features.sectionSubtitle}</p>
+    </div>
+
+    <div class="features-container">
+      <div class="feature-row">
+        <div class="feature-image">
+          <img src="/assets/landing_phone_1_glow.png" alt={t.features.teamBuilding.imageAlt}>
+        </div>
+        <div class="feature-content">
+          <h3 class="feature-title">{t.features.teamBuilding.title}</h3>
+          <p class="feature-description">{t.features.teamBuilding.description}</p>
+          <ul class="feature-list">
+            {t.features.teamBuilding.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-row feature-row--reversed">
+        <div class="feature-image">
+          <img src="/assets/landing_phone_2_glow.png" alt={t.features.leadGameplans.imageAlt}>
+        </div>
+        <div class="feature-content">
+          <h3 class="feature-title">{t.features.leadGameplans.title}</h3>
+          <p class="feature-description">{t.features.leadGameplans.description}</p>
+          <ul class="feature-list">
+            {t.features.leadGameplans.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-image">
+          <img src="/assets/landing_phone_5_glow.png" alt={t.features.customMovesets.imageAlt}>
+        </div>
+        <div class="feature-content">
+          <h3 class="feature-title">{t.features.customMovesets.title}</h3>
+          <p class="feature-description">{t.features.customMovesets.description}</p>
+          <ul class="feature-list">
+            {t.features.customMovesets.items.map((item) => <li>{item}</li>)}
+          </ul>
+          <a href={featureLinkPath} class="feature-link">{t.features.customMovesets.linkText}</a>
+        </div>
+      </div>
+
+      <div class="feature-row feature-row--reversed">
+        <div class="feature-image">
+          <img src="/assets/landing_phone_3_glow.png" alt={t.features.rankings.imageAlt}>
+        </div>
+        <div class="feature-content">
+          <h3 class="feature-title">{t.features.rankings.title}</h3>
+          <p class="feature-description">{t.features.rankings.description}</p>
+          <ul class="feature-list">
+            {t.features.rankings.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-image">
+          <img src="/assets/landing_phone_4_glow.png" alt={t.features.matchupAnalysis.imageAlt}>
+        </div>
+        <div class="feature-content">
+          <h3 class="feature-title">{t.features.matchupAnalysis.title}</h3>
+          <p class="feature-description">{t.features.matchupAnalysis.description}</p>
+          <ul class="feature-list">
+            {t.features.matchupAnalysis.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-header">
+      <h2 class="section-title">{t.testimonials.title}</h2>
+      <p class="section-subtitle">{t.testimonials.subtitle}</p>
+    </div>
+
+    <div class="testimonials-grid">
+      {testimonials.map((tst) => (
+        <div class="testimonial-card">
+          <p class="testimonial-quote" lang="en">{tst.quote}</p>
+          <p class="testimonial-author">{tst.author}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- What's New Section -->
+  {posts.length > 0 && (
+    <section class="whats-new">
+      <div class="section-header">
+        <h2 class="section-title">{t.whatsNew.title}</h2>
+        <p class="section-subtitle">{t.whatsNew.subtitle}</p>
+      </div>
+
+      <div class="whats-new-grid">
+        {posts.map((post) => {
+          const slug = post.id.split('/').slice(1).join('/');
+          // Always link inside the current locale — non-EN routes serve EN
+          // content as a fallback when no native translation exists, so the
+          // user stays inside their language tree.
+          const href = localizedPath(`/blog/${slug}`, lang);
+          return (
+            <a href={href} class="whats-new-card">
+              <h3 class="whats-new-card-title">{post.data.title}</h3>
+              <p class="whats-new-card-description">{post.data.description}</p>
+              <div class="whats-new-card-footer">
+                <time class="whats-new-card-date" datetime={post.data.pubDate.toISOString()}>
+                  {formatDate(post.data.pubDate, lang)}
+                </time>
+                <span class="whats-new-card-link">{t.whatsNew.readMore}</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <div class="whats-new-all">
+        <a href={blogPath}>{t.whatsNew.viewAll}</a>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="section-header">
+      <h2 class="section-title">{t.faq.title}</h2>
+    </div>
+
+    <div class="faq-grid">
+      {t.faq.items.map((item) => (
+        <div class="faq-item">
+          <h3 class="faq-question">{item.question}</h3>
+          <p class="faq-answer">{item.answer}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-container">
+      <img src="/assets/logo_vertical.png" alt="PoGoTeams" class="cta-mascots">
+      <h2 class="cta-title">{t.cta.title}</h2>
+      <p class="cta-subtitle">{t.cta.subtitle}</p>
+      <div class="store-buttons">
+        <a href={iosPath} class="store-btn">
+          <img src="/assets/app-store-badge.svg" alt={t.hero.appStoreAlt}>
+        </a>
+        <a href={androidPath} class="store-btn">
+          <img src="/assets/google-play-badge.svg" alt={t.hero.googlePlayAlt}>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <a href={homePath}><img src="/assets/logo_horizontal.png" alt="PoGoTeams" class="footer-logo"></a>
+      <ul class="footer-links">
+        <li><a href={blogPath}>{t.footer.blog}</a></li>
+        <li><a href={privacyPath}>{t.footer.privacy}</a></li>
+        <li><a href={supportPath}>{t.footer.support}</a></li>
+      </ul>
+      <LanguageSwitcher lang={lang} pathname={pathname} />
+      <p class="footer-disclaimer">
+        {t.footer.disclaimerLine1}<br>
+        {t.footer.disclaimerLine2}
+      </p>
+      <p class="footer-copyright">{t.footer.copyright}</p>
+    </div>
+  </footer>
+
+<!-- Cloudflare Web Analytics --><script is:inline defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "229b36c080104f4f808b7b4ddd334d3d"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

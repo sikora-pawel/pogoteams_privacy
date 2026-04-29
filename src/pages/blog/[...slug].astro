@@ -4,17 +4,21 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: post,
-  }));
+  return posts
+    .filter((post) => post.id.startsWith('en/'))
+    .map((post) => ({
+      params: { slug: post.id.replace(/^en\//, '') },
+      props: { post },
+    }));
 }
 
-const post = Astro.props;
+const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
 <BlogPost
+  lang="en"
+  contentLang="en"
   title={post.data.title}
   description={post.data.description}
   pubDate={post.data.pubDate}

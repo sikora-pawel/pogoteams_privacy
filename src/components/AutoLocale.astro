@@ -1,0 +1,54 @@
+---
+// Two inline scripts:
+//   1. On `/` (EN home), redirect to a saved/browser-detected locale once.
+//   2. On any page, persist the chosen locale when a language-switcher link is clicked.
+// Both rely on `localStorage['pogoteams-lang']`. Pref takes priority over `navigator.language`,
+// so once a user picks EN explicitly via the switcher, the auto-redirect stops firing.
+---
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = 'pogoteams-lang';
+    var SUPPORTED = ['pl', 'de', 'ja'];
+
+    if (window.location.pathname === '/') {
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        var target = null;
+        if (saved === 'en') {
+          // Explicit user choice: stay here.
+        } else if (saved && SUPPORTED.indexOf(saved) !== -1) {
+          target = saved;
+        } else if (!saved) {
+          var nav = (navigator.language || '').toLowerCase();
+          for (var i = 0; i < SUPPORTED.length; i++) {
+            var loc = SUPPORTED[i];
+            if (nav === loc || nav.indexOf(loc + '-') === 0) {
+              target = loc;
+              break;
+            }
+          }
+        }
+        if (target) {
+          window.location.replace('/' + target + '/');
+          return;
+        }
+      } catch (e) {
+        // localStorage unavailable (private mode etc.) — fall through.
+      }
+    }
+
+    document.addEventListener('click', function (e) {
+      var el = e.target;
+      while (el && el !== document) {
+        if (el.classList && el.classList.contains('lang-link')) {
+          var hl = el.getAttribute('hreflang');
+          if (hl) {
+            try { localStorage.setItem(STORAGE_KEY, hl); } catch (err) { /* ignore */ }
+          }
+          return;
+        }
+        el = el.parentNode;
+      }
+    }, true);
+  })();
+</script>
