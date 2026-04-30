@@ -45,6 +45,14 @@ const GOOGLE_BADGE_LOCALES = new Set(['en', 'pl', 'de', 'ja', 'es', 'fr', 'it', 
 const appStoreBadgeSrc = `/assets/badges/appstore/${APPLE_BADGE_LOCALES.has(lang) ? lang : 'en'}.svg`;
 const googlePlayBadgeSrc = `/assets/badges/googleplay/${GOOGLE_BADGE_LOCALES.has(lang) ? lang : 'en'}.png`;
 
+// Localized landing phone screenshots live at /assets/<locale>/landing_phone_<n>_glow.png.
+// Falls back to /assets/landing_phone_<n>_glow.png (EN) for locales not yet shipped.
+const PHONE_SCREENSHOT_LOCALES = new Set(['pl']);
+const phoneAsset = (n: number) =>
+  PHONE_SCREENSHOT_LOCALES.has(lang)
+    ? `/assets/${lang}/landing_phone_${n}_glow.png`
+    : `/assets/landing_phone_${n}_glow.png`;
+
 const softwareAppSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -1021,7 +1029,7 @@ const testimonials = [
         </div>
       </div>
       <div class="hero-phones">
-        <img src="/assets/landing_phone_3_glow.png" alt={t.hero.phone1Alt} class="hero-phone">
+        <img src={phoneAsset(3)} alt={t.hero.phone1Alt} class="hero-phone">
         <div class="hero-phone phone-video-container">
           <video class="phone-video" autoplay muted loop playsinline poster="/assets/screen-ios1.png">
             <source src="/assets/screen_video.webm" type="video/webm">
@@ -1042,7 +1050,7 @@ const testimonials = [
     <div class="features-container">
       <div class="feature-row">
         <div class="feature-image">
-          <img src="/assets/landing_phone_1_glow.png" alt={t.features.teamBuilding.imageAlt}>
+          <img src={phoneAsset(1)} alt={t.features.teamBuilding.imageAlt}>
         </div>
         <div class="feature-content">
           <h3 class="feature-title">{t.features.teamBuilding.title}</h3>
@@ -1055,7 +1063,7 @@ const testimonials = [
 
       <div class="feature-row feature-row--reversed">
         <div class="feature-image">
-          <img src="/assets/landing_phone_2_glow.png" alt={t.features.leadGameplans.imageAlt}>
+          <img src={phoneAsset(2)} alt={t.features.leadGameplans.imageAlt}>
         </div>
         <div class="feature-content">
           <h3 class="feature-title">{t.features.leadGameplans.title}</h3>
@@ -1068,7 +1076,7 @@ const testimonials = [
 
       <div class="feature-row">
         <div class="feature-image">
-          <img src="/assets/landing_phone_5_glow.png" alt={t.features.customMovesets.imageAlt}>
+          <img src={phoneAsset(5)} alt={t.features.customMovesets.imageAlt}>
         </div>
         <div class="feature-content">
           <h3 class="feature-title">{t.features.customMovesets.title}</h3>
@@ -1082,7 +1090,7 @@ const testimonials = [
 
       <div class="feature-row feature-row--reversed">
         <div class="feature-image">
-          <img src="/assets/landing_phone_3_glow.png" alt={t.features.rankings.imageAlt}>
+          <img src={phoneAsset(3)} alt={t.features.rankings.imageAlt}>
         </div>
         <div class="feature-content">
           <h3 class="feature-title">{t.features.rankings.title}</h3>
@@ -1095,7 +1103,7 @@ const testimonials = [
 
       <div class="feature-row">
         <div class="feature-image">
-          <img src="/assets/landing_phone_4_glow.png" alt={t.features.matchupAnalysis.imageAlt}>
+          <img src={phoneAsset(4)} alt={t.features.matchupAnalysis.imageAlt}>
         </div>
         <div class="feature-content">
           <h3 class="feature-title">{t.features.matchupAnalysis.title}</h3>
