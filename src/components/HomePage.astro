@@ -47,7 +47,7 @@ const googlePlayBadgeSrc = `/assets/badges/googleplay/${GOOGLE_BADGE_LOCALES.has
 
 // Localized landing phone screenshots live at /assets/<locale>/landing_phone_<n>_glow.png.
 // Falls back to /assets/landing_phone_<n>_glow.png (EN) for locales not yet shipped.
-const PHONE_SCREENSHOT_LOCALES = new Set(['pl']);
+const PHONE_SCREENSHOT_LOCALES = new Set(['pl', 'de', 'ja']);
 const phoneAsset = (n: number) =>
   PHONE_SCREENSHOT_LOCALES.has(lang)
     ? `/assets/${lang}/landing_phone_${n}_glow.png`
